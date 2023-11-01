@@ -3,6 +3,7 @@ module Scenes
     def self.tick(args)
       render_background(args)
       render_player(args)
+      render_enemies(args)
     end
 
     def self.render_background(args)
@@ -25,6 +26,21 @@ module Scenes
     def self.render_player(args)
       puts Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
       args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
+    end
+
+    def self.render_enemies(args)
+      args.state.enemies ||= generate_enemies(args)
+      args.state.enemies.each { |enemy| enemy.render(args) }
+    end
+
+    def self.generate_enemies(args)
+      amount = rand(10)
+      enemies = []
+
+      amount.times do
+        enemies << Enemies::Slime.new(args)
+      end
+      enemies
     end
   end
 end
