@@ -4,6 +4,7 @@ module Scenes
       render_background(args)
       render_player(args)
       render_enemies(args)
+      handle_input(args)
     end
 
     def self.render_background(args)
@@ -24,8 +25,13 @@ module Scenes
     end
 
     def self.render_player(args)
-      puts Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
       args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
+    end
+
+    def self.handle_input(args)
+      if args.inputs # change later to make this only for up, down, left, right--other inputs may do a menu or something
+        Scenes::Game::PlayerMovement.tick(args)
+      end
     end
 
     def self.render_enemies(args)

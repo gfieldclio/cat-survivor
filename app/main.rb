@@ -5,6 +5,7 @@ require "app/sprites/terrain"
 require "app/sprites/player"
 require "app/sprites/slime"
 require "app/enemies/slime"
+require "app/scenes/game/player_movement"
 
 def tick args
   args.outputs.solids << [0, 0, 1280, 720, 0, 0, 0]
