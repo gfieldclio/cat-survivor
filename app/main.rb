@@ -11,6 +11,10 @@ def tick args
     args.state.scene = :game
   end
 
+  if args.inputs.keyboard.key_down.space
+    args.state.scene = args.state.scene == :intro ? :game : :intro
+  end
+
   case args.state.scene
   when :intro
     Scenes::Intro.tick(args)
