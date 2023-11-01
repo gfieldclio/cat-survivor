@@ -1,3 +1,4 @@
+require "app/constants"
 require "app/scenes/intro"
 require "app/scenes/game"
 require "app/sprites/terrain"
