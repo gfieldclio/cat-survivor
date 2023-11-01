@@ -23,6 +23,7 @@ module Sprites
       'up_still' => [37, 102]
     }
 
+    # change these with key presses
     def self.tile(x:, y:, type:, key:)
       path = FILE_PATH + FILE_MAP[type]
       tile_x, tile_y = sprite_position(key)
