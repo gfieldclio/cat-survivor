@@ -1,4 +1,4 @@
-module Scenes::Game
+module Sprites
   module Player
     FILE_PATH = 'sprites/cats/'.freeze
     TILE_WIDTH = 22
