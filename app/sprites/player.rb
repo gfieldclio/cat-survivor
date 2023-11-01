@@ -30,10 +30,10 @@ module Sprites
       {
         x: x,
         y: y,
-        w: TILE_WIDTH,
-        h: TILE_HEIGHT,
-        tile_x: tile_x * TILE_WIDTH,
-        tile_y: tile_y * TILE_HEIGHT,
+        w: TILE_WIDTH * 3,
+        h: TILE_HEIGHT * 3,
+        tile_x: tile_x,
+        tile_y: tile_y,
         tile_w: TILE_WIDTH,
         tile_h: TILE_HEIGHT,
         path: path

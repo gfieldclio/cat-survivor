@@ -20,6 +20,7 @@ module Scenes
     end
 
     def self.render_player(args)
+      puts Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
       args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
     end
   end
