@@ -8,7 +8,7 @@ def tick args
   args.outputs.solids << [0, 0, 1280, 720, 0, 0, 0]
 
   if args.state.scene.nil?
-    args.state.scene = :game
+    args.state.scene = :intro
   end
 
   if args.inputs.keyboard.key_down.space
