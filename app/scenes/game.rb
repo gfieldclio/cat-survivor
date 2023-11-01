@@ -34,7 +34,6 @@ module Scenes
       player.render(args)
       player.handle_movement(args)
       # args.state.player ||= Scenes::Game::Player.new(args)
-
     end
 
     def self.move_enemies(args)

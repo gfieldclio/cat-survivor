@@ -5,7 +5,7 @@ require "app/scenes/game/enemies/slime"
 require "app/sprites/terrain"
 require "app/sprites/player"
 require "app/sprites/slime"
-require "app/enemies/slime"
+require "app/scenes/game/enemies/slime"
 require "app/scenes/game/player"
 
 def tick args
