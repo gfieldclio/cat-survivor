@@ -17,12 +17,12 @@ module Scenes
           x = row * Sprites::Terrain::SPRITE_SIZE
           y = col * Sprites::Terrain::SPRITE_SIZE
 
-          type = Sprites::Terrain::FILE_MAP.keys[row % Sprites::Terrain::FILE_MAP.keys.length]
-          key = Sprites::Terrain::TILE_MAP.keys[col % Sprites::Terrain::TILE_MAP.length]
+          type = Sprites::Terrain::Ground::FILE_MAP.keys[row % Sprites::Terrain::Ground::FILE_MAP.keys.length]
+          key = Sprites::Terrain::Ground::TILE_MAP.keys[col % Sprites::Terrain::Ground::TILE_MAP.length]
           side = [nil, "top", "bottom", "left", "right", "top_left", "top_right", "bottom_left", "bottom_right"][col % 9]
 
           puts "x: #{x}, y: #{y}, type: #{type}, key: #{key}, side: #{side}" if args.state.test.nil?
-          args.outputs.sprites << Sprites::Terrain.tile(x: x, y: y, type: type, key: key, side: side)
+          args.outputs.sprites << Sprites::Terrain::Ground.tile(x: x, y: y, type: type, key: key, side: side)
         end
       end
       args.state.test = true

@@ -2,11 +2,8 @@ require "app/constants"
 require "app/scenes/intro"
 require "app/scenes/game"
 require "app/scenes/game/enemies/slime"
-require "app/sprites/terrain"
-require "app/sprites/player"
-require "app/sprites/slime"
-require "app/scenes/game/enemies/slime"
 require "app/scenes/game/player"
+require "app/sprites/sprites"
 
 def tick args
   args.outputs.solids << [0, 0, 1280, 720, 0, 0, 0]

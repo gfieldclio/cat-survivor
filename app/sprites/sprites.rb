@@ -1,0 +1,5 @@
+require "app/sprites/player"
+require "app/sprites/slime"
+require "app/sprites/terrain/bushes"
+require "app/sprites/terrain/ground"
+require "app/sprites/terrain/rocks"
