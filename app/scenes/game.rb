@@ -3,7 +3,9 @@ module Scenes
     def self.tick(args)
       render_background(args)
       render_player(args)
-      render_enemies(args)
+
+      args.state.enemies ||= generate_enemies(args)
+      move_enemies(args)
     end
 
     def self.render_background(args)
@@ -28,17 +30,17 @@ module Scenes
       args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
     end
 
-    def self.render_enemies(args)
-      args.state.enemies ||= generate_enemies(args)
-      args.state.enemies.each { |enemy| enemy.render(args) }
+    def self.move_enemies(args)
+      args.state.enemies.each { |enemy| enemy.move(args) }
     end
 
     def self.generate_enemies(args)
-      amount = rand(10)
+      random_amount = rand(10)
+      random_amount = 1 if random_amount == 0
       enemies = []
 
-      amount.times do
-        enemies << Enemies::Slime.new(args)
+      random_amount.times do
+        enemies << Scenes::Game::Enemies::Slime.new(args)
       end
       enemies
     end
