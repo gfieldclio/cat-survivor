@@ -9,6 +9,8 @@ module Sprites
       "hills1" => "Set_A_Hills1.png",
       "hills2" => "Set_A_Hills2.png",
       "hills3" => "Set_A_Hills3.png",
+      "woods1" => "Set_A_Darkwoods1.png",
+      "woods2" => "Set_A_Darkwoods2.png",
     }
     TILE_MAP = {
       "grass" => [1, 4],
