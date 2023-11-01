@@ -19,14 +19,16 @@ module Scenes
 
           type = Sprites::Terrain::FILE_MAP.keys[row % Sprites::Terrain::FILE_MAP.keys.length]
           key = Sprites::Terrain::TILE_MAP.keys[col % Sprites::Terrain::TILE_MAP.length]
+          side = [nil, "top", "bottom", "left", "right", "top_left", "top_right", "bottom_left", "bottom_right"][col % 9]
 
-          args.outputs.sprites << Sprites::Terrain.tile(x: x, y: y, type: type, key: key)
+          puts "x: #{x}, y: #{y}, type: #{type}, key: #{key}, side: #{side}" if args.state.test.nil?
+          args.outputs.sprites << Sprites::Terrain.tile(x: x, y: y, type: type, key: key, side: side)
         end
       end
+      args.state.test = true
     end
 
     def self.render_player(args)
-      puts Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
       args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
     end
 
