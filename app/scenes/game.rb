@@ -14,7 +14,10 @@ module Scenes
           x = row * Sprites::Terrain::SPRITE_SIZE
           y = col * Sprites::Terrain::SPRITE_SIZE
 
-          args.outputs.sprites << Sprites::Terrain.tile(x: x, y: y, type: "hills", key: "ground")
+          type = Sprites::Terrain::FILE_MAP.keys[row % Sprites::Terrain::FILE_MAP.keys.length]
+          key = Sprites::Terrain::TILE_MAP.keys[col % Sprites::Terrain::TILE_MAP.length]
+
+          args.outputs.sprites << Sprites::Terrain.tile(x: x, y: y, type: type, key: key)
         end
       end
     end
