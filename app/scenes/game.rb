@@ -6,16 +6,17 @@ module Scenes
       Scenes::Game::Level.tick(args)
       render_player(args)
 
-
-
       args.state.enemies ||= generate_enemies(args)
       move_enemies(args)
 
       # 1. Find the closest enemy to player within a set radius
       if enemy = find_closest_enemy(args, 150)
-        enemy.take_damage(scratch_weapon(args, enemy.x, enemy.y), args)
+        enemy.take_damage(Weapons::Scratch.attack(args, enemy.x, enemy.y), args)
+        Weapons::Laser.attack(args, enemy.x, enemy.y)
         # destroy enemy from pool of enemies
         args.state.enemies.delete(enemy) if enemy.dead?
+      else
+        Weapons::Laser.scout(args)
       end
     end
 
@@ -41,10 +42,6 @@ module Scenes
         enemies << Scenes::Game::Enemies::Slime.new(args)
       end
       enemies
-    end
-
-    def self.scratch_weapon(args, enemy_x, enemy_y)
-      Weapons::Scratch.new(enemy_x, enemy_y).attack(args)
     end
 
     def self.find_closest_enemy(args, radius)
