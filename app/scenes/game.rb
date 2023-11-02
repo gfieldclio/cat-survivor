@@ -15,7 +15,7 @@ module Scenes
 
       # 1. Find the closest enemy to player within a set radius
       if enemy = find_closest_enemy(args, 150)
-        enemy.take_damage(Weapons::Scratch.attack(args, enemy.x, enemy.y), args)
+        enemy.take_damage(args, Weapons::Scratch.attack(args, enemy.x, enemy.y))
         Weapons::Laser.attack(args, enemy.x, enemy.y)
         Weapons::Feather.attack(args, enemy.x, enemy.y)
 
@@ -37,7 +37,7 @@ module Scenes
 
     def self.move_enemies(args)
       args.state.enemies.each do |enemy|
-        enemy.move(args.state.player.x, args.state.player.y, args)
+        enemy.move(args, args.state.player.x, args.state.player.y)
         
         if args.geometry.intersect_rect?(enemy, args.state.player)
           #todo: hurt the cat

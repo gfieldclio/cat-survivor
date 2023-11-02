@@ -1,7 +1,7 @@
 module Scenes::Game
   module Enemies
     class Slime
-      attr_accessor :x, :y, :w, :h, :health
+      attr_accessor :x, :y, :w, :h, :health, :started_running_at
 
       STARTING_HEALTH = 300.freeze
       SPEED = 2.freeze
@@ -12,6 +12,7 @@ module Scenes::Game
         @health = STARTING_HEALTH
         @w = 32
         @h = 32
+        @started_running_at = args.tick_count
         render(args)
       end
 
@@ -28,8 +29,8 @@ module Scenes::Game
           @y = @y > args.state.player.y ? @y + radius : @y - radius
         end
       end
-
-      def move(target_x, target_y, args)
+      
+      def move(args, target_x, target_y)
         return render_death(args) if dead?
 
         angle = { x: target_x, y: target_y }.angle_from({ x: @x, y: @y }).to_radians
@@ -39,7 +40,7 @@ module Scenes::Game
         render(args)
       end
 
-      def take_damage(damage, args)
+      def take_damage(args, damage)
         @health -= damage
         render_death(args) if dead?
       end
@@ -54,7 +55,7 @@ module Scenes::Game
       end
 
       def render(args)
-        args.outputs.sprites << Sprites::Slime.tile(x: @x, y: @y, type: "slime_walking", key: "still")
+        args.outputs.sprites << Sprites::Slime.tile(slime: self, x: @x, y: @y, type: "slime_walking", key: "walking")
       end
 
       def serialize
