@@ -23,6 +23,7 @@ module Scenes::Game
       args.state.player.cat_type ||= "cat_6"
       args.state.player.level ||= 1
       args.state.player.health ||= 500
+      args.state.player.weapon ||= Weapons::Scratch
       # display on main screen?
     end
 
@@ -38,6 +39,7 @@ module Scenes::Game
       args.state.player.cat_type ||= "cat_6"
       args.state.player.level = 1
       args.state.player.health = 500
+      args.state.player.weapon = Weapons::Scratch
     end
 
     def self.toggle_on_iteration(args)

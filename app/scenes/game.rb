@@ -15,9 +15,10 @@ module Scenes
 
       # 1. Find the closest enemy to player within a set radius
       if enemy = find_closest_enemy(args, 150)
-        enemy.take_damage(args, Weapons::Scratch.attack(args, enemy.x, enemy.y))
-        Weapons::Laser.attack(args, enemy.x, enemy.y)
-        Weapons::Feather.attack(args, enemy.x, enemy.y)
+        enemy.take_damage(args, args.state.player.weapon.attack(args, enemy.x, enemy.y))
+        # enemy.take_damage(args, Weapons::Scratch.attack(args, enemy.x, enemy.y))
+        # Weapons::Laser.attack(args, enemy.x, enemy.y)
+        # Weapons::Feather.attack(args, enemy.x, enemy.y)
 
         # destroy enemy from pool of enemies
         if enemy.dead?
@@ -29,8 +30,9 @@ module Scenes
           end
         end
       else
-        Weapons::Laser.scout(args)
-        Weapons::Feather.scout(args)
+        if (args.state.player.weapon == Weapons::Feather) || (args.state.player.weapon == Weapons::Laser)
+          args.state.player.weapon.scout(args)
+        end
       end
     end
 

@@ -5,7 +5,7 @@ module Scenes::Game
 
       STARTING_HEALTH = 300.freeze
       SPEED = 2.freeze
-      DAMAGE = 10.freeze
+      # DAMAGE = 10.freeze
 
       def initialize(args)
         set_starting_position(args)
@@ -41,6 +41,7 @@ module Scenes::Game
       end
 
       def take_damage(args, damage)
+        # puts damage
         @health -= damage
         render_death(args) if dead?
       end
