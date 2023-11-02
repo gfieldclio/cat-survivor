@@ -1,5 +1,10 @@
 module Scenes::Game
   module Player
+
+    def self.take_damage(args)
+      args.state.player.health -= 2 # replace with whatever damage diff enemies do
+    end
+
     def self.render(args)
       args.state.player.x ||= args.grid.center_x.to_i
       args.state.player.y ||= args.grid.center_y.to_i
@@ -10,6 +15,9 @@ module Scenes::Game
 
       args.state.player.key ||= "down_still"
       args.state.player.cat_type ||= "cat_6"
+      args.state.player.level ||= 1
+      args.state.player.health ||= 500
+      # display on main screen?
     end
 
     def self.toggle_on_iteration(args)
