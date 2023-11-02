@@ -22,6 +22,8 @@ module Weapons
       move_feather_randomly_within_radius(args)
 
       render(args, enemy_x, enemy_y)
+
+      DAMAGE
     end
 
     def self.render(args, pos_x, pos_y)

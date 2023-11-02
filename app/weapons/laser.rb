@@ -24,6 +24,8 @@ module Weapons
       laser_y = enemy_y
 
       args.outputs.lines << [laser_x + 10, laser_y + 10, 1_000, 1_000, 255, 0, 0, 100]
+
+      DAMAGE
     end
 
     private
