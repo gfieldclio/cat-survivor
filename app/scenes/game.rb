@@ -9,11 +9,11 @@ module Scenes
       args.state.enemies ||= generate_enemies(args)
       move_enemies(args)
 
-      
       # 1. Find the closest enemy to player within a set radius
       if enemy = find_closest_enemy(args, 50)
-        scratch_weapon(args, enemy.x, enemy.y)
+        enemy.take_damage(scratch_weapon(args, enemy.x, enemy.y), args)
         # destroy enemy from pool of enemies
+        args.state.enemies.delete(enemy) if enemy.dead?
       end
     end
 
