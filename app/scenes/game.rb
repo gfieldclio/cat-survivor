@@ -29,11 +29,8 @@ module Scenes
     end
 
     def self.render_player(args)
-      # args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
-      player = Scenes::Game::Player.new(args)
-      player.render(args)
-      player.handle_movement(args)
-      # args.state.player ||= Scenes::Game::Player.new(args)
+      Scenes::Game::Player.render(args)
+      Scenes::Game::Player.handle_movement(args)
     end
 
     def self.move_enemies(args)
