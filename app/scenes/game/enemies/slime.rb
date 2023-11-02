@@ -1,6 +1,7 @@
 module Scenes::Game
   module Enemies
     class Slime
+      attr_accessor :x, :y
 
       SPEED = 1
 
@@ -11,13 +12,15 @@ module Scenes::Game
         render(args)
       end
       
-      def move(args)
-        # todo: get player coordinates via args
-        player_x = 100
-        player_y = 100
+      def move(target_x, target_y, args)
 
-        @x = player_x > @x ? @x + SPEED : @x - SPEED
-        @y = player_y > @y ? @y + SPEED : @y - SPEED
+        # todo: get the centre of the player so we don't need to do this
+        target_x = target_x + 25
+        target_y = target_y + 25
+
+        angle = { x: target_x, y: target_y }.angle_from({ x: @x, y: @y }).to_radians
+        @x += Math.cos(angle) * SPEED
+        @y += Math.sin(angle) * SPEED
 
         render(args)
       end
@@ -26,6 +29,20 @@ module Scenes::Game
         args.outputs.sprites << Sprites::Slime.tile(x: @x, y: @y, type: "slime_walking", key: "still")
       end
 
+      def serialize
+        {
+          x: @x,
+          y: @y
+        }
+      end
+
+      def inspect
+        serialize.to_s
+      end
+
+      def to_s
+        serialize.to_s
+      end
     end
   end
 end
