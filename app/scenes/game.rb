@@ -59,8 +59,7 @@ module Scenes
         end
       end
 
-      args.state.dying_enemies.delete_if { |enemy| !enemy.animate_dying(args) }
-
+      args.state.dying_enemies.delete_if { |enemy| !enemy.animate_dying_in_progress?(args) }
     end
 
     def self.generate_enemies(args)

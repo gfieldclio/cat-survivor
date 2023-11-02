@@ -40,7 +40,7 @@ module Scenes::Game
         render(args, "walking")
       end
 
-      def animate_dying(args)
+      def animate_dying_in_progress?(args)
         tile = Sprites::Slime.tile(slime: self, x: @x, y: @y, type: "dying")
         return false if tile.nil?
         args.outputs.sprites << tile
