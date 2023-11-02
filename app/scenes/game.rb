@@ -64,10 +64,6 @@ module Scenes
       enemies
     end
 
-    def self.scratch_weapon(args, enemy_x, enemy_y)
-      Weapons::Scratch.attack(args, enemy_x, enemy_y)
-    end
-
     def self.find_closest_enemy(args, radius)
       enemies_within_radius = args.state.enemies.select {|enemy| distance_to(args, enemy.x, enemy.y) <= radius }
       enemies_within_radius.min_by { |enemy| distance_to(args, enemy.x, enemy.y) }
