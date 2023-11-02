@@ -1,7 +1,9 @@
+require "app/scenes/game/level"
+
 module Scenes
   module Game
     def self.tick(args)
-      render_background(args)
+      Scenes::Game::Level.tick(args)
       render_player(args)
 
 
@@ -15,26 +17,6 @@ module Scenes
         # destroy enemy from pool of enemies
         args.state.enemies.delete(enemy) if enemy.dead?
       end
-    end
-
-    def self.render_background(args)
-      rows = (SCREEN_WIDTH / Sprites::Terrain::Ground::SPRITE_SIZE).ceil
-      cols = (SCREEN_HEIGHT / Sprites::Terrain::Ground::SPRITE_SIZE).ceil
-
-      rows.times do |row|
-        cols.times do |col|
-          x = row * Sprites::Terrain::Ground::SPRITE_SIZE
-          y = col * Sprites::Terrain::Ground::SPRITE_SIZE
-
-          type = Sprites::Terrain::Ground::FILE_MAP.keys[row % Sprites::Terrain::Ground::FILE_MAP.keys.length]
-          key = Sprites::Terrain::Ground::TILE_MAP.keys[col % Sprites::Terrain::Ground::TILE_MAP.length]
-          side = [nil, "top", "bottom", "left", "right", "top_left", "top_right", "bottom_left", "bottom_right"][col % 9]
-
-          puts "x: #{x}, y: #{y}, type: #{type}, key: #{key}, side: #{side}" if args.state.test.nil?
-          args.outputs.sprites << Sprites::Terrain::Ground.tile(x: x, y: y, type: type, key: key, side: side)
-        end
-      end
-      args.state.test = true
     end
 
     def self.render_player(args)
