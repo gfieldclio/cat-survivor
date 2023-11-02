@@ -36,7 +36,7 @@ module Weapons
       @sprite_index = 
         start_animation_on_tick.frame_index count: FRAMES,    # how many sprites?
                                             hold_for: 2,  # how long to hold each sprite?
-                                            repeat: false  # should it repeat?
+                                            repeat: true  # should it repeat?
 
       @sprite_index ||= 0  
       
