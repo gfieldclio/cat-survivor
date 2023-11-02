@@ -26,8 +26,8 @@ module Sprites
       {
         x: x,
         y: y,
-        w: TILE_SIZE,
-        h: TILE_SIZE,
+        w: TILE_SIZE * 2,
+        h: TILE_SIZE * 2,
         path: path,
         tile_x: tile_x + (tile_index * TILE_SIZE),
         tile_y: tile_y,

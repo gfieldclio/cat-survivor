@@ -34,6 +34,12 @@ module Scenes
       end
     end
 
+    def self.reset(args)
+      Scenes::Game::Player.reset(args)
+      args.state.enemies = []
+      args.state.kill_count = 0
+    end
+
     def self.render_player(args)
       Scenes::Game::Player.render(args)
       Scenes::Game::Player.handle_movement(args)
@@ -43,7 +49,7 @@ module Scenes
     def self.move_enemies(args)
       args.state.enemies.each do |enemy|
         enemy.move(args, args.state.player.x, args.state.player.y)
-        
+
         if args.geometry.intersect_rect?(enemy, args.state.player)
           if (args.tick_count/20).to_i % 2 == 0 # to do: see if this is too frequent or not frequent enough for enemies to damage player
             Scenes::Game::Player.take_damage(args, enemy)
@@ -55,7 +61,7 @@ module Scenes
     end
 
     def self.generate_enemies(args)
-      random_amount = rand(10)
+      random_amount = rand(10) * (args.state.player.level/2).to_i
       random_amount = 5 if random_amount == 0
       enemies = []
 
