@@ -16,7 +16,7 @@ module Scenes::Game
       end
 
       def set_starting_position(args)
-        radius = 150
+        radius = 170
         @x = rand(SCREEN_WIDTH)
         @y = rand(SCREEN_HEIGHT)
 
