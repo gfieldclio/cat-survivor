@@ -1,5 +1,5 @@
-module Sprites
-  module Terrain
+module Sprites::Terrain
+  module Bushes
     FILE_PATH = 'sprites/terrain/Set_B_Exteriors'.freeze
     TILE_SIZE = 16
     SPRITE_SIZE = 32
@@ -20,7 +20,7 @@ module Sprites
       "snow_bush" => [7, 0],
     }
 
-    def self.tile(x:, y:, type:, key:)
+    def self.tile(x:, y:, key:)
       tile_x, tile_y = tile_position(key)
 
       {
