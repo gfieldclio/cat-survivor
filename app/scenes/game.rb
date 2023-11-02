@@ -5,8 +5,10 @@ module Scenes
     def self.tick(args)
       Scenes::Game::Level.tick(args)
       render_player(args)
+      args.state.enemies ||= []
 
-      args.state.enemies ||= generate_enemies(args)
+
+      args.state.enemies = generate_enemies(args) if args.state.enemies.empty?
       move_enemies(args)
 
       # 1. Find the closest enemy to player within a set radius
@@ -28,7 +30,11 @@ module Scenes
     def self.move_enemies(args)
       args.state.enemies.each do |enemy|
         enemy.move(args.state.player.x, args.state.player.y, args)
-        # todo: check if enemy intersects with player
+        
+        if args.geometry.intersect_rect?(enemy, args.state.player)
+          #todo: hurt the cat
+          puts "Slime Attack!"
+        end
       end
 
     end
