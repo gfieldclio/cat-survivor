@@ -1,14 +1,14 @@
 module Sprites
-  module Terrain
-    FILE_PATH = 'sprites/terrain/'.freeze
-    TILE_SIZE = 16
+  module Slime
+    FILE_PATH = 'sprites/slime/'.freeze
+    TILE_SIZE = 18
     SPRITE_SIZE = 32
 
     FILE_MAP = {
-      "hills" => "Set_A_Hills1.png",
+      "slime_walking" => "S_Walk.png",
     }
     TILE_MAP = {
-      "ground" => [1, 4],
+      "still" => [1, 1],
     }
 
     def self.tile(x:, y:, type:, key:)

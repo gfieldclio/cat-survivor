@@ -2,7 +2,7 @@ module Sprites
   module Player
     FILE_PATH = 'sprites/cats/'.freeze
     TILE_WIDTH = 22
-    TILE_HEIGHT = 25
+    TILE_HEIGHT = 26
 
     FILE_MAP = {
       "cat_1" => "pipo-nekonin006.png",
@@ -23,6 +23,7 @@ module Sprites
       'up_still' => [37, 102]
     }
 
+    # change these with key presses
     def self.tile(x:, y:, type:, key:)
       path = FILE_PATH + FILE_MAP[type]
       tile_x, tile_y = sprite_position(key)
@@ -30,10 +31,10 @@ module Sprites
       {
         x: x,
         y: y,
-        w: TILE_WIDTH,
-        h: TILE_HEIGHT,
-        tile_x: tile_x * TILE_WIDTH,
-        tile_y: tile_y * TILE_HEIGHT,
+        w: TILE_WIDTH * 3,
+        h: TILE_HEIGHT * 3,
+        tile_x: tile_x,
+        tile_y: tile_y,
         tile_w: TILE_WIDTH,
         tile_h: TILE_HEIGHT,
         path: path
