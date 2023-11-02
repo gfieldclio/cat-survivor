@@ -3,6 +3,11 @@ module Scenes::Game
     def self.render(args)
       args.state.player.x ||= args.grid.center_x
       args.state.player.y ||= args.grid.center_y
+
+      #todo: hardcoded this for now
+      args.state.player.w ||= 30
+      args.state.player.h ||= 30
+
       args.state.player.key ||= "down_still"
       args.state.player.cat_type ||= "cat_6"
     end
