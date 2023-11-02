@@ -32,10 +32,6 @@ module Scenes::Game
       def move(target_x, target_y, args)
         return render_death(args) if dead?
 
-        # todo: get the centre of the player so we don't need to do this
-        target_x = target_x + 25
-        target_y = target_y + 25
-
         angle = { x: target_x, y: target_y }.angle_from({ x: @x, y: @y }).to_radians
         @x += Math.cos(angle) * SPEED
         @y += Math.sin(angle) * SPEED
