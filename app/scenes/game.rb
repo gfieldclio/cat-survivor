@@ -8,10 +8,11 @@ module Scenes
       Scenes::Game::Level.tick(args)
       render_player(args)
       args.state.enemies ||= []
+      args.state.dying_enemies ||= []
       args.state.kill_count ||= 0
 
       args.state.enemies = generate_enemies(args) if args.state.enemies.empty?
-      move_enemies(args)
+      update_enemies(args)
 
       # 1. Find the closest enemy to player within a set radius
       if enemy = find_closest_enemy(args, 150)
@@ -22,7 +23,7 @@ module Scenes
 
         # destroy enemy from pool of enemies
         if enemy.dead?
-          args.state.enemies.delete(enemy)
+          args.state.dying_enemies << args.state.enemies.delete(enemy)
           args.state.kill_count += 1
           if args.state.kill_count % 30 == 0
             args.state.player.level += 1
@@ -48,7 +49,7 @@ module Scenes
       # Scenes::Game::Player.level_up(args)
     end
 
-    def self.move_enemies(args)
+    def self.update_enemies(args)
       args.state.enemies.each do |enemy|
         enemy.move(args, args.state.player.x, args.state.player.y)
 
@@ -60,9 +61,11 @@ module Scenes
         end
       end
 
+      args.state.dying_enemies.delete_if { |enemy| !enemy.animate_dying_in_progress?(args) }
     end
 
     def self.generate_enemies(args)
+      srand
       random_amount = rand(10) * (args.state.player.level/2).to_i
       random_amount = 5 if random_amount == 0
       enemies = []

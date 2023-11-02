@@ -4,24 +4,32 @@ module Sprites
     TILE_SIZE = 47
 
     FILE_MAP = {
-      "slime_walking" => "D_Walk.png",
-      "slime_death" => "D_Death.png",
+      "walking" => "D_Walk.png",
+      "dying" => "D_Death.png",
     }
     TILE_MAP = {
       "walking" => [1, 0],
+      "dying" => [1, 0],
     }
 
-    def self.tile(slime:, x:, y:, type:, key:)
+    def self.tile(slime:, x:, y:, type:)
       path = FILE_PATH + FILE_MAP[type]
-      tile_x, tile_y = tile_asset_position(key)
+      tile_x, tile_y = tile_asset_position(type)
 
       frames_in_sprite_sheet = 6
       ticks_per_frame = 8
-      repeat_index = true
-      tile_index = slime.started_running_at
-                        .frame_index(frames_in_sprite_sheet,
+
+      if type == "dying"
+        tile_index = slime.started_dying_at.frame_index(frames_in_sprite_sheet,
                                     ticks_per_frame,
-                                    repeat_index)
+                                    false)
+        return if tile_index.nil?
+      else
+        tile_index = slime.started_running_at.frame_index(frames_in_sprite_sheet,
+                                    ticks_per_frame,
+                                    true)
+
+      end
 
       {
         x: x,
