@@ -4,16 +4,16 @@ module Scenes
       render_background(args)
       render_player(args)
 
-
-
       args.state.enemies ||= generate_enemies(args)
       move_enemies(args)
 
-      
       # 1. Find the closest enemy to player within a set radius
       if enemy = find_closest_enemy(args, 50)
-        scratch_weapon(args, enemy.x, enemy.y)
+        Weapons::Scratch.attack(args, enemy.x, enemy.y)
         # destroy enemy from pool of enemies
+        Weapons::Laser.attack(args, enemy.x, enemy.y)
+      else
+        Weapons::Laser.scout(args)
       end
     end
 
@@ -65,7 +65,7 @@ module Scenes
     end
 
     def self.scratch_weapon(args, enemy_x, enemy_y)
-      Weapons::Scratch.new(enemy_x, enemy_y).attack(args)
+      Weapons::Scratch.attack(args, enemy_x, enemy_y)
     end
 
     def self.find_closest_enemy(args, radius)
