@@ -24,7 +24,7 @@ module Scenes::Game
         toggle_on_iteration(args)
         args.state.player.x -= 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
-        
+
         if args.inputs.keyboard.key_up.left
           args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: "left_still")
           args.state.player.key = "left_still"
@@ -43,12 +43,12 @@ module Scenes::Game
         toggle_on_iteration(args)
         args.state.player.x += 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
-        
+
         if args.inputs.keyboard.key_up.right
           args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: "right_still")
           args.state.player.key = "right_still"
         end
-        
+
         if args.inputs.keyboard.down
           args.state.player.y -= 2
           args.state.player.x -= 1
@@ -62,7 +62,7 @@ module Scenes::Game
         toggle_on_iteration(args)
         args.state.player.y += 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
-        
+
         if args.inputs.keyboard.key_up.up
           args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: "up_still")
           args.state.player.key = "up_still"
@@ -72,7 +72,7 @@ module Scenes::Game
         toggle_on_iteration(args)
         args.state.player.y -= 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
-        
+
         if args.inputs.keyboard.key_up.down
           args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: "down_still")
           args.state.player.key = "down_still"

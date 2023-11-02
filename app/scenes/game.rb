@@ -6,12 +6,10 @@ module Scenes
       Scenes::Game::Level.tick(args)
       render_player(args)
       args.state.enemies ||= []
-
+      args.state.kill_count ||= 0
 
       args.state.enemies = generate_enemies(args) if args.state.enemies.empty?
       move_enemies(args)
-
-      
 
       # 1. Find the closest enemy to player within a set radius
       if enemy = find_closest_enemy(args, 150)
@@ -20,7 +18,10 @@ module Scenes
         Weapons::Feather.attack(args, enemy.x, enemy.y)
 
         # destroy enemy from pool of enemies
-        args.state.enemies.delete(enemy) if enemy.dead?
+        if enemy.dead?
+          args.state.enemies.delete(enemy)
+          args.state.kill_count += 1
+        end
       else
         Weapons::Laser.scout(args)
         Weapons::Feather.scout(args)
