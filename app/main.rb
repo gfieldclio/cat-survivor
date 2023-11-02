@@ -1,9 +1,9 @@
 require "app/constants"
+require "app/sprites/sprites"
 require "app/scenes/intro"
 require "app/scenes/game"
 require "app/scenes/game/enemies/slime"
 require "app/scenes/game/player"
-require "app/sprites/sprites"
 require "app/weapons/scratch"
 require "app/weapons/laser"
 

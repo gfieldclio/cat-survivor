@@ -1,48 +1,28 @@
+require "app/scenes/game/level"
+
 module Scenes
   module Game
     def self.tick(args)
-      render_background(args)
+      Scenes::Game::Level.tick(args)
       render_player(args)
 
       args.state.enemies ||= generate_enemies(args)
       move_enemies(args)
 
       # 1. Find the closest enemy to player within a set radius
-      if enemy = find_closest_enemy(args, 50)
-        Weapons::Scratch.attack(args, enemy.x, enemy.y)
-        # destroy enemy from pool of enemies
+      if enemy = find_closest_enemy(args, 150)
+        enemy.take_damage(Weapons::Scratch.attack(args, enemy.x, enemy.y), args)
         Weapons::Laser.attack(args, enemy.x, enemy.y)
+        # destroy enemy from pool of enemies
+        args.state.enemies.delete(enemy) if enemy.dead?
       else
         Weapons::Laser.scout(args)
       end
     end
 
-    def self.render_background(args)
-      rows = (SCREEN_WIDTH / Sprites::Terrain::Ground::SPRITE_SIZE).ceil
-      cols = (SCREEN_HEIGHT / Sprites::Terrain::Ground::SPRITE_SIZE).ceil
-
-      rows.times do |row|
-        cols.times do |col|
-          x = row * Sprites::Terrain::Ground::SPRITE_SIZE
-          y = col * Sprites::Terrain::Ground::SPRITE_SIZE
-
-          type = Sprites::Terrain::Ground::FILE_MAP.keys[row % Sprites::Terrain::Ground::FILE_MAP.keys.length]
-          key = Sprites::Terrain::Ground::TILE_MAP.keys[col % Sprites::Terrain::Ground::TILE_MAP.length]
-          side = [nil, "top", "bottom", "left", "right", "top_left", "top_right", "bottom_left", "bottom_right"][col % 9]
-
-          puts "x: #{x}, y: #{y}, type: #{type}, key: #{key}, side: #{side}" if args.state.test.nil?
-          args.outputs.sprites << Sprites::Terrain::Ground.tile(x: x, y: y, type: type, key: key, side: side)
-        end
-      end
-      args.state.test = true
-    end
-
     def self.render_player(args)
-      # args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
-      player = Scenes::Game::Player.new(args)
-      player.render(args)
-      player.handle_movement(args)
-      # args.state.player ||= Scenes::Game::Player.new(args)
+      Scenes::Game::Player.render(args)
+      Scenes::Game::Player.handle_movement(args)
     end
 
     def self.move_enemies(args)
