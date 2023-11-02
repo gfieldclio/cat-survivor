@@ -42,11 +42,11 @@ module Scenes
     def self.move_enemies(args)
       args.state.enemies.each do |enemy|
         enemy.move(args.state.player.x, args.state.player.y, args)
-        
-        # if args.geometry.intersect_rect?(enemy, args.state.player)
-        #   #todo: hurt the cat
-        #   puts "Slime Attack!"
-        # end
+
+        if args.geometry.intersect_rect?(enemy, args.state.player)
+          #todo: hurt the cat
+          puts "Slime Attack!"
+        end
       end
 
     end
