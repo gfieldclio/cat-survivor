@@ -7,6 +7,7 @@ module Scenes
 
       cycle_cats(args)
       if args.keyboard.enter || args.controller_one.x
+        args.state.player.health = 500
         select_cat(args)
       end
 

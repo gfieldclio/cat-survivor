@@ -25,17 +25,36 @@ module Scenes::Game
 
       (left_sprite.to_i..right_sprite.to_i).each do |sprite_x|
         (bottom_sprite.to_i..top_sprite.to_i).each do |sprite_y|
-          x = (sprite_x * TERRAIN_SPRITE_SIZE) - args.state.camera.x
-          y = (sprite_y * TERRAIN_SPRITE_SIZE) - args.state.camera.y
-
-          args.outputs.sprites << Sprites::Terrain::Ground.tile(
-            x: x,
-            y: y,
-            type: args.state.level.terrain_type,
-            key: "grass",
-            side: "top",
-          )
+          render_tile(args, sprite_x, sprite_y)
         end
+      end
+    end
+
+    def self.render_tile(args, sprite_x, sprite_y)
+      x = (sprite_x * TERRAIN_SPRITE_SIZE) - args.state.camera.x
+      y = (sprite_y * TERRAIN_SPRITE_SIZE) - args.state.camera.y
+
+      args.outputs.sprites << Sprites::Terrain::Ground.tile(
+        x: x,
+        y: y,
+        type: args.state.level.terrain_type,
+        key: "grass"
+      )
+
+      if sprite_x % 25 == 0 && sprite_y % 25 == 0
+        args.outputs.sprites << Sprites::Terrain::Rocks.tile(
+          x: x,
+          y: y,
+          type: args.state.level.terrain_type,
+          key: "rock#{sprite_x % 2 + 1}"
+        )
+      elsif (sprite_x + 10) % 25 == 0 && (sprite_y + 10) % 25 == 1
+        args.outputs.sprites << Sprites::Terrain::Bushes.tile(
+          x: x,
+          y: y,
+          type: args.state.level.terrain_type,
+          key: sprite_x % 2 == 0 ? "bush" : "bush_flowers",
+        )
       end
     end
   end
