@@ -37,7 +37,13 @@ module Scenes
     end
 
     def self.move_enemies(args)
-      args.state.enemies.each { |enemy| enemy.move(args) }
+      args.state.enemies.each do |enemy|
+        enemy.move(args.state.player.x, args.state.player.y, args)
+
+        # todo: check if enemy intersects with player
+
+      end
+
     end
 
     def self.generate_enemies(args)
