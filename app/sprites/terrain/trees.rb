@@ -3,25 +3,24 @@ module Sprites
     module Trees
       FILE_PATH = 'sprites/terrain/Set_B_Exteriors'.freeze
       TILE_MAP = {
-        "bare1" => [0, 12],
-        "bare2" => [4, 12],
-        "leafy1" => [0, 4],
-        "leafy2" => [0, 6],
-        "leafy3" => [0, 8],
-        "leafy4" => [0, 10],
-        "leafy5" => [4, 10],
-        "pine1" => [4, 4],
-        "pine2" => [4, 6],
-        "pine3" => [4, 8],
-        "snowy_bare1" => [8, 0],
-        "snowy_bare2" => [12, 0],
-        "snowy_pine1" => [8, 4],
-        "palm" => [0, 14],
-        "cactus" => [4, 14],
+        "desert_tree1" => [0, 14],
+        "desert_tree2" => [4, 14],
+        "hills1_tree1" => [0, 4],
+        "hills1_tree2" => [4, 4],
+        "hills2_tree1" => [0, 8],
+        "hills2_tree2" => [0, 10],
+        "hills3_tree1" => [0, 6],
+        "hills3_tree2" => [4, 6],
+        "woods1_tree1" => [4, 10],
+        "woods1_tree2" => [4, 8],
+        "woods2_tree1" => [0, 12],
+        "woods2_tree2" => [4, 12],
+        "snowy_tree1" => [8, 0],
+        "snowy_tree2" => [8, 4],
       }
 
-      def self.tile(x:, y:, key:, piece:)
-        tile_x, tile_y = tile_position(key, piece)
+      def self.tile(x:, y:, type:, key:, piece:)
+        tile_x, tile_y = tile_position("#{type}_#{key}", piece)
 
         {
           x: x,
@@ -41,7 +40,7 @@ module Sprites
 
         case piece
         when "top_left"
-          # nothing
+          # noop
         when "top_right"
           tile_x += 1
         when "bottom_left"

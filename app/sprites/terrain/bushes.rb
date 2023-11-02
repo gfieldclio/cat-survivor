@@ -7,10 +7,10 @@ module Sprites
         "desert_bush_flowers" => [0, 3],
         "hills1_bush" => [1, 0],
         "hills1_bush_flowers" => [2, 0],
-        "hills2_bush" => [3, 0],
-        "hills2_bush_flowers" => [4, 0],
-        "hills3_bush" => [5, 0],
-        "hills3_bush_flowers" => [6, 0],
+        "hills2_bush" => [5, 0],
+        "hills2_bush_flowers" => [6, 0],
+        "hills3_bush" => [3, 0],
+        "hills3_bush_flowers" => [4, 0],
         "snow_bush" => [7, 0],
         "snow_bush_flowers" => [7, 0],
         "woods1_bush" => [2, 1],
@@ -21,9 +21,6 @@ module Sprites
 
       def self.tile(x:, y:, type:, key:)
         tile_x, tile_y = tile_position("#{type}_#{key}")
-        puts "key: #{key}"
-        puts "tile_x: #{tile_x * TERRAIN_TILE_SIZE}, tile_y: #{tile_y * TERRAIN_TILE_SIZE}"
-        puts "tile_w: #{TERRAIN_TILE_SIZE}, tile_h: #{TERRAIN_TILE_SIZE}"
 
         {
           x: x,
