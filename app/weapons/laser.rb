@@ -13,7 +13,7 @@ module Weapons
       laser_x = args.state.player.x + args.state.laser.relative_x
       laser_y = args.state.player.y + args.state.laser.relative_y
 
-      args.outputs.lines << [laser_x + 10, laser_y + 10, laser_x + 1_000, laser_y + 1_000, 255, 0, 0, 255]
+      args.outputs.lines << [laser_x + 10, laser_y + 10, 1_000, 1_000, 255, 0, 0, 255]
     end
 
     def self.attack(args, enemy_x, enemy_y)
@@ -24,7 +24,7 @@ module Weapons
       laser_x = enemy_x
       laser_y = enemy_y
 
-      args.outputs.lines << [laser_x + 10, laser_y + 10, laser_x + 1_000, laser_y + 1_000, 255, 0, 0, 255]
+      args.outputs.lines << [laser_x + 10, laser_y + 10, 1_000, 1_000, 255, 0, 0, 255]
     end
 
     private
@@ -37,8 +37,8 @@ module Weapons
     end
 
     def self.move_laser_randomly_within_radius(args)
-      dx = (SPEED + (rand * 2 - 1)) * Math.cos(args.state.laser.direction * Math::PI / 180)
-      dy = (SPEED + (rand * 2 - 1)) * Math.sin(args.state.laser.direction * Math::PI / 180)
+      dx = ((rand * SPEED) + (rand * 2 - 1)) * Math.cos(args.state.laser.direction * Math::PI / 180)
+      dy = ((rand * SPEED) + (rand * 2 - 1)) * Math.sin(args.state.laser.direction * Math::PI / 180)
 
       new_relative_x = args.state.laser.relative_x + dx
       new_relative_y = args.state.laser.relative_y + dy
