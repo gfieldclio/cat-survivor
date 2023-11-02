@@ -3,6 +3,13 @@ module Scenes
     def self.tick(args)
       render_background(args)
       render_player(args)
+
+      puts args.state.tick_count
+
+      # 1. Find the closest enemy to player within a set radius
+      # 2. Get the enemies x and y position
+      damage = scratch_weapon(args, 100, 100)
+      # 3. Get the damage amount and subtract from enemy health
     end
 
     def self.render_background(args)
@@ -23,6 +30,10 @@ module Scenes
 
     def self.render_player(args)
       args.outputs.sprites << Sprites::Player.tile(x: 100, y: 100, type: "cat_1", key: "down_still")
+    end
+
+    def self.scratch_weapon(args, enemy_x, enemy_y)
+      Weapons::Scratch.new(enemy_x, enemy_y).attack(args)
     end
   end
 end
