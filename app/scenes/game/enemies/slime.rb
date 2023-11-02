@@ -1,6 +1,7 @@
 module Scenes::Game
   module Enemies
     class Slime
+      attr_accessor :x, :y
 
       SPEED = 1
 
@@ -28,6 +29,20 @@ module Scenes::Game
         args.outputs.sprites << Sprites::Slime.tile(x: @x, y: @y, type: "slime_walking", key: "still")
       end
 
+      def serialize
+        {
+          x: @x,
+          y: @y
+        }
+      end
+
+      def inspect
+        serialize.to_s
+      end
+
+      def to_s
+        serialize.to_s
+      end
     end
   end
 end
