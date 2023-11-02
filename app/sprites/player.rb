@@ -2,7 +2,7 @@ module Sprites
   module Player
     FILE_PATH = 'sprites/cats/'.freeze
     TILE_WIDTH = 22
-    TILE_HEIGHT = 25
+    TILE_HEIGHT = 26
 
     FILE_MAP = {
       "cat_1" => "pipo-nekonin006.png",
