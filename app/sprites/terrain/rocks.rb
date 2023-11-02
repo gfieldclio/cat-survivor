@@ -12,8 +12,8 @@ module Sprites
         "woods2" => "Set_A_Darkwoods2.png",
       }
       TILE_MAP = {
-        "grass_rock1" => [6, 5],
-        "grass_rock2" => [7, 5],
+        "rock1" => [6, 5],
+        "rock2" => [7, 5],
         "water1_rock1" => [13, 0],
         "water1_rock2" => [13, 1],
         "water2_rock1" => [14, 0],
