@@ -80,7 +80,9 @@ module Sprites
         tile_y: tile_y,
         tile_w: TILE_WIDTH,
         tile_h: TILE_HEIGHT,
-        path: path
+        path: path,
+        anchor_x: 0.5,
+        anchor_y: 0.5
       }
     end
 
