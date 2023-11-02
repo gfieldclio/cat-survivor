@@ -1,18 +1,32 @@
 module Scenes::Game
   module Enemies
     class Slime
-      attr_accessor :x, :y, :health
+      attr_accessor :x, :y, :w, :h, :health
 
       STARTING_HEALTH = 300.freeze
-      SPEED = 1.freeze
+      SPEED = 2.freeze
       DAMAGE = 10.freeze
 
       def initialize(args)
-        # todo: don't spawn enemies too close to player
+        set_starting_position(args)
+        @health = STARTING_HEALTH
+        @w = 32
+        @h = 32
+        render(args)
+      end
+
+      def set_starting_position(args)
+        radius = 170
         @x = rand(SCREEN_WIDTH)
         @y = rand(SCREEN_HEIGHT)
-        @health = STARTING_HEALTH
-        render(args)
+
+        if (@x - args.state.player.x).abs < radius
+          @x = @x > args.state.player.x ? @x + radius : @x - radius
+        end
+
+        if (@y - args.state.player.y).abs < radius
+          @y = @y > args.state.player.y ? @y + radius : @y - radius
+        end
       end
       
       def move(target_x, target_y, args)
@@ -50,7 +64,9 @@ module Scenes::Game
       def serialize
         {
           x: @x,
-          y: @y
+          y: @y,
+          w: @w,
+          h: @h
         }
       end
 
