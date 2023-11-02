@@ -6,8 +6,8 @@ module Scenes::Game
       args.state.player.health -= 5 # replace with whatever damage diff enemies do
       puts args.state.player.health
       if args.state.player.health < 0
+        # death animation?
         args.state.scene = :intro
-        # this works but we need to reset the game after this and it doesn't currently
       end
     end
 
