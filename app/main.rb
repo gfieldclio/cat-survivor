@@ -6,6 +6,7 @@ require "app/scenes/game/enemies/slime"
 require "app/scenes/game/player"
 require "app/weapons/scratch"
 require "app/weapons/laser"
+require "app/weapons/feather"
 
 def tick args
   args.outputs.solids << [0, 0, 1280, 720, 0, 0, 0]
