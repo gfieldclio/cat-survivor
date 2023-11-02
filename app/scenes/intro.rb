@@ -1,6 +1,8 @@
 module Scenes
   module Intro
     def self.tick(args)
+      args.state.center_x = 640
+      args.state.center_y = 360
       args.state.cat ||= 1
 
       cycle_cats(args)
@@ -9,11 +11,12 @@ module Scenes
       end
 
       args.outputs.labels << {
-        x: 600,
+        x: args.state.center_x,
         y: 400,
         text: "Select a cat with the Left or Right keys, then press Enter to start the game!",
         # size specification can be either size_enum or size_px
         size_enum: 2,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
         alignment_enum: 1,
         r: 155,
         g: 50,
@@ -67,19 +70,20 @@ module Scenes
 
       sprite_index ||= 0
 
-      args.outputs.sprites << { x: 500,
-                                y: 200,
-                                w: 100,
-                                h: 100,
-                                tile_x: 32 * sprite_index,
-                                tile_y: 0,
-                                tile_w: 32,
-                                tile_h: 32,
-                                path: "sprites/cats/pipo-nekonin#{'%03d' % args.state.cat}.png" }
+      args.outputs.sprites << {
+        x: args.state.center_x - 50,
+        y: 200,
+        w: 100,
+        h: 100,
+        tile_x: 32 * sprite_index,
+        tile_y: 0,
+        tile_w: 32,
+        tile_h: 32,
+        path: "sprites/cats/pipo-nekonin#{'%03d' % args.state.cat}.png" }
     end
 
     def self.render_start_button(args)
-      x = 100
+      x = args.state.center_x - 100
       y = 100
       w = 200
       h = 100
@@ -91,7 +95,7 @@ module Scenes
       button[:primitives] = [
         { x: x, y: y, w: w, h: h }.border,
         { x: x, y: y, w: w, h: h, path: 'sprites/buttons/simple/17.png' }.sprite,
-        { x: x, y: y, text: 'Select', r: 155,
+        { x: args.state.center_x, y: y + 50, text: 'Select', r: 155,
           g: 50,
           b: 50,
           a: 255,
