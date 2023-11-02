@@ -25,6 +25,7 @@ module Scenes
           args.state.kill_count += 1
           if args.state.kill_count % 30 == 0
             args.state.player.level += 1
+            puts args.state.player.level
           end
         end
       else
@@ -44,8 +45,10 @@ module Scenes
         enemy.move(args.state.player.x, args.state.player.y, args)
 
         if args.geometry.intersect_rect?(enemy, args.state.player)
-          #todo: only hurt the cat once, or every few seconds at least--this is hurting the cat lots
-          Scenes::Game::Player.take_damage(args, enemy)
+          if (args.tick_count/20).to_i % 2 == 0 # to do: see if this is too frequent or not frequent enough for enemies to damage player
+            Scenes::Game::Player.take_damage(args, enemy)
+            puts "cat is hurt!"
+          end
         end
       end
 

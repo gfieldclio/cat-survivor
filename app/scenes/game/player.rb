@@ -3,8 +3,12 @@ module Scenes::Game
 
     def self.take_damage(args, enemy)
       # puts enemy
-      args.state.player.health -= 5
-      puts args.state.player.health # replace with whatever damage diff enemies do
+      args.state.player.health -= 5 # replace with whatever damage diff enemies do
+      puts args.state.player.health
+      if args.state.player.health < 0
+        args.state.scene = :intro
+        # this works but we need to reset the game after this and it doesn't currently
+      end
     end
 
     def self.render(args)
