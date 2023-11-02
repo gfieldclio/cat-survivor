@@ -14,6 +14,9 @@ module Scenes::Game
         w: LEVEL_MAX_X,
         h: LEVEL_MAX_Y,
       }
+      args.state.level.tree_seed = rand(100_000)
+      args.state.level.rock_seed = rand(100_000)
+      args.state.level.bush_seed = rand(100_000)
       args.state.level.terrain_type = Sprites::Terrain::Ground::FILE_MAP.keys.sample
     end
 
@@ -41,44 +44,81 @@ module Scenes::Game
         key: "grass"
       )
 
-      srand(sprite_x * sprite_y)
-      if tree?(sprite_x, sprite_y)
-        # noop
-      elsif rock?(sprite_x, sprite_y)
-        render_rock(args, x, y)
-      elsif bush?(sprite_x, sprite_y)
-        render_bush(args, x, y)
-      end
+      render_tree(args, sprite_x, sprite_y, x, y) ||
+        render_bush(args, sprite_x, sprite_y, x, y) ||
+        render_rock(args, sprite_x, sprite_y, x, y)
     end
 
-    def self.tree?(sprite_x, sprite_y)
-      false
+    def self.render_tree(args, sprite_x, sprite_y, x, y)
+      return false unless sprite_x % 50 < 16 && sprite_y % 40 < 12
+
+      left = sprite_x - sprite_x % 50
+      right = left + 15
+      bottom = sprite_y - sprite_y % 40
+      top = bottom + 11
+      r = Random.new(args.state.level.tree_seed * left * bottom)
+
+      return false if r.rand(3) == 0
+
+      piece = if sprite_x == left && sprite_y % 2 == 0
+                "bottom_left"
+              elsif sprite_x == left && sprite_y % 2 == 1
+                "top_left"
+              elsif sprite_x == right && sprite_y % 2 == 0
+                "bottom_right"
+              elsif sprite_x == right && sprite_y % 2 == 1
+                "top_right"
+              elsif sprite_y == bottom && sprite_x % 2 == 0
+                "bottom_left"
+              elsif sprite_y == bottom && sprite_x % 2 == 1
+                "bottom_right"
+              elsif sprite_y == top && sprite_x % 2 == 0
+                "top_left"
+              elsif sprite_y == top && sprite_x % 2 == 1
+                "top_right"
+              elsif sprite_x % 2 == 0 && sprite_y % 2 == 0
+                "forest_bottom_left"
+              elsif sprite_x % 2 == 1 && sprite_y % 2 == 0
+                "forest_bottom_right"
+              elsif sprite_x % 2 == 0 && sprite_y % 2 == 1
+                "forest_top_left"
+              elsif sprite_x % 2 == 1 && sprite_y % 2 == 1
+                "forest_top_right"
+              end
+
+      args.outputs.sprites << Sprites::Terrain::Trees.tile(
+        x: x,
+        y: y,
+        type: args.state.level.terrain_type,
+        key: r.rand(2) == 0 ? "tree1" : "tree2",
+        piece: piece
+      )
     end
 
-    def self.bush?(sprite_x, sprite_y)
-      (rand * 25).to_i % 25 == 0
-    end
+    def self.render_bush(args, sprite_x, sprite_y, x, y)
+      r = Random.new(args.state.level.bush_seed * sprite_x * sprite_y)
+      return false unless r.rand(25) % 25 == 0
 
-    def self.render_bush(args, x, y)
       args.outputs.sprites << Sprites::Terrain::Bushes.tile(
         x: x,
         y: y,
         type: args.state.level.terrain_type,
-        key: rand.round == 0 ? "bush" : "bush_flowers",
+        key: r.rand.round == 0 ? "bush" : "bush_flowers",
       )
+      true
     end
 
-    def self.rock?(sprite_x, sprite_y)
-      (rand * 25).to_i % 25 == 0
-    end
+    def self.render_rock(args, sprite_x, sprite_y, x, y)
+      r = Random.new(args.state.level.rock_seed * sprite_x * sprite_y)
+      return false unless r.rand(25) % 25 == 0
 
-    def self.render_rock(args, x, y)
       args.outputs.sprites << Sprites::Terrain::Rocks.tile(
         x: x,
         y: y,
         type: args.state.level.terrain_type,
-        key: "rock#{rand.round + 1}"
+        key: "rock#{r.rand.round + 1}"
       )
+      true
     end
   end
 end

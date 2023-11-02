@@ -1,7 +1,7 @@
 module Sprites
   module Terrain
     module Trees
-      FILE_PATH = 'sprites/terrain/Set_B_Exteriors'.freeze
+      FILE_PATH = 'sprites/terrain/Set_B_Exteriors.png'.freeze
       TILE_MAP = {
         "desert_tree1" => [0, 14],
         "desert_tree2" => [4, 14],
@@ -11,12 +11,12 @@ module Sprites
         "hills2_tree2" => [0, 10],
         "hills3_tree1" => [0, 6],
         "hills3_tree2" => [4, 6],
+        "snow_tree1" => [8, 0],
+        "snow_tree2" => [8, 2],
         "woods1_tree1" => [4, 10],
         "woods1_tree2" => [4, 8],
         "woods2_tree1" => [0, 12],
         "woods2_tree2" => [4, 12],
-        "snowy_tree1" => [8, 0],
-        "snowy_tree2" => [8, 4],
       }
 
       def self.tile(x:, y:, type:, key:, piece:)
