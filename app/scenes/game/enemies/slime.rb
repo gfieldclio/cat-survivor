@@ -28,7 +28,7 @@ module Scenes::Game
           @y = @y > args.state.player.y ? @y + radius : @y - radius
         end
       end
-      
+
       def move(target_x, target_y, args)
         return render_death(args) if dead?
 
@@ -49,7 +49,7 @@ module Scenes::Game
       end
 
       def render_death(args)
-        #todo 
+        #todo
         nil
       end
 

@@ -1,8 +1,8 @@
 module Scenes::Game
   module Player
     def self.render(args)
-      args.state.player.x ||= args.grid.center_x
-      args.state.player.y ||= args.grid.center_y
+      args.state.player.x ||= args.grid.center_x.to_i
+      args.state.player.y ||= args.grid.center_y.to_i
 
       #todo: hardcoded this for now
       args.state.player.w ||= 30

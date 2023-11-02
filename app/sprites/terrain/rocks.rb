@@ -29,12 +29,12 @@ module Sprites
         {
           x: x,
           y: y,
-          w: SPRITE_SIZE,
-          h: SPRITE_SIZE,
-          tile_x: tile_x * TILE_SIZE,
-          tile_y: tile_y * TILE_SIZE,
-          tile_w: TILE_SIZE,
-          tile_h: TILE_SIZE,
+          w: TERRAIN_SPRITE_SIZE,
+          h: TERRAIN_SPRITE_SIZE,
+          tile_x: tile_x * TERRAIN_TILE_SIZE,
+          tile_y: tile_y * TERRAIN_TILE_SIZE,
+          tile_w: TERRAIN_TILE_SIZE,
+          tile_h: TERRAIN_TILE_SIZE,
           path: path
         }
       end

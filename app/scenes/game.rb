@@ -1,8 +1,10 @@
+require "app/scenes/game/camera"
 require "app/scenes/game/level"
 
 module Scenes
   module Game
     def self.tick(args)
+      Scenes::Game::Camera.tick(args)
       Scenes::Game::Level.tick(args)
       render_player(args)
       args.state.enemies ||= []
