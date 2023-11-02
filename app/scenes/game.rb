@@ -44,8 +44,8 @@ module Scenes
         enemy.move(args.state.player.x, args.state.player.y, args)
 
         if args.geometry.intersect_rect?(enemy, args.state.player)
-          #todo: hurt the cat
-          puts "Slime Attack!"
+          #todo: only hurt the cat once, or every few seconds at least--this is hurting the cat lots
+          Scenes::Game::Player.take_damage(args, enemy)
         end
       end
 

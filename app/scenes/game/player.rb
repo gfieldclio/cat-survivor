@@ -1,8 +1,10 @@
 module Scenes::Game
   module Player
 
-    def self.take_damage(args)
-      args.state.player.health -= 2 # replace with whatever damage diff enemies do
+    def self.take_damage(args, enemy)
+      # puts enemy
+      args.state.player.health -= 5
+      puts args.state.player.health # replace with whatever damage diff enemies do
     end
 
     def self.render(args)
