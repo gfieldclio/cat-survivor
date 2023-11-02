@@ -41,21 +41,37 @@ module Scenes::Game
         key: "grass"
       )
 
-      if sprite_x % 25 == 0 && sprite_y % 25 == 0
-        args.outputs.sprites << Sprites::Terrain::Rocks.tile(
-          x: x,
-          y: y,
-          type: args.state.level.terrain_type,
-          key: "rock#{sprite_x % 2 + 1}"
-        )
-      elsif (sprite_x + 10) % 25 == 0 && (sprite_y + 10) % 25 == 1
-        args.outputs.sprites << Sprites::Terrain::Bushes.tile(
-          x: x,
-          y: y,
-          type: args.state.level.terrain_type,
-          key: sprite_x % 2 == 0 ? "bush" : "bush_flowers",
-        )
+      if rock?(sprite_x, sprite_y)
+        render_rock(args, x, y)
+      elsif bush?(sprite_x, sprite_y)
+        render_bush(args, x, y)
       end
+    end
+
+    def self.bush?(sprite_x, sprite_y)
+      (sprite_x + 10) % 25 == 0 && (sprite_y + 10) % 25 == 1
+    end
+
+    def self.render_bush(args, x, y)
+      args.outputs.sprites << Sprites::Terrain::Bushes.tile(
+        x: x,
+        y: y,
+        type: args.state.level.terrain_type,
+        key: srand(x) % 2 == 0 ? "bush" : "bush_flowers",
+      )
+    end
+
+    def self.rock?(sprite_x, sprite_y)
+      sprite_x % 25 == 0 && sprite_y % 25 == 0
+    end
+
+    def self.render_rock(args, x, y)
+      args.outputs.sprites << Sprites::Terrain::Rocks.tile(
+        x: x,
+        y: y,
+        type: args.state.level.terrain_type,
+        key: "rock#{srand(x) % 2 + 1}"
+      )
     end
   end
 end
