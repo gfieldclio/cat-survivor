@@ -8,7 +8,9 @@ module Scenes
       cycle_cats(args)
       if args.keyboard.enter || args.controller_one.x
         args.state.player.health = 500
+        Scenes::Game.reset(args)
         select_cat(args)
+        args.state.scene = :game
       end
 
       args.outputs.labels << {
@@ -58,7 +60,6 @@ module Scenes
 
     def self.select_cat(args)
       args.state.player.cat_type = "cat_#{args.state.cat}"
-      args.state.scene = :game
     end
 
     def self.render_cat(args)

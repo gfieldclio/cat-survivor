@@ -26,6 +26,20 @@ module Scenes::Game
       # display on main screen?
     end
 
+    def self.reset(args)
+      args.state.player.x = args.grid.center_x.to_i
+      args.state.player.y = args.grid.center_y.to_i
+
+      #todo: hardcoded this for now
+      args.state.player.w = 30
+      args.state.player.h = 30
+
+      args.state.player.key = "down_still"
+      args.state.player.cat_type ||= "cat_6"
+      args.state.player.level = 1
+      args.state.player.health = 500
+    end
+
     def self.toggle_on_iteration(args)
       if (args.tick_count/10).to_i % 2 == 0 && args.state.player.key[-1] == "1"
         args.state.player.key[-1] = "2"

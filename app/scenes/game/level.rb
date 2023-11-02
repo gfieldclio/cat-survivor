@@ -41,15 +41,22 @@ module Scenes::Game
         key: "grass"
       )
 
-      if rock?(sprite_x, sprite_y)
+      srand(sprite_x * sprite_y)
+      if tree?(sprite_x, sprite_y)
+        # noop
+      elsif rock?(sprite_x, sprite_y)
         render_rock(args, x, y)
       elsif bush?(sprite_x, sprite_y)
         render_bush(args, x, y)
       end
     end
 
+    def self.tree?(sprite_x, sprite_y)
+      false
+    end
+
     def self.bush?(sprite_x, sprite_y)
-      (sprite_x + 10) % 25 == 0 && (sprite_y + 10) % 25 == 1
+      (rand * 25).to_i % 25 == 0
     end
 
     def self.render_bush(args, x, y)
@@ -57,12 +64,12 @@ module Scenes::Game
         x: x,
         y: y,
         type: args.state.level.terrain_type,
-        key: srand(x) % 2 == 0 ? "bush" : "bush_flowers",
+        key: rand.round == 0 ? "bush" : "bush_flowers",
       )
     end
 
     def self.rock?(sprite_x, sprite_y)
-      sprite_x % 25 == 0 && sprite_y % 25 == 0
+      (rand * 25).to_i % 25 == 0
     end
 
     def self.render_rock(args, x, y)
@@ -70,7 +77,7 @@ module Scenes::Game
         x: x,
         y: y,
         type: args.state.level.terrain_type,
-        key: "rock#{srand(x) % 2 + 1}"
+        key: "rock#{rand.round + 1}"
       )
     end
   end
