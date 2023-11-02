@@ -40,7 +40,9 @@ module Sprites
         tile_x: tile_x + (tile_index * TILE_SIZE),
         tile_y: tile_y,
         tile_w: TILE_SIZE,
-        tile_h: TILE_SIZE
+        tile_h: TILE_SIZE,
+        anchor_x: 0.5,
+        anchor_y: 0.5
       }
     end
 
