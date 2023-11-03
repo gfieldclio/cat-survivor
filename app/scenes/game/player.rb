@@ -98,26 +98,6 @@ module Scenes::Game
           args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: "down_still")
           args.state.player.key = "down_still"
         end
-      elsif args.inputs.keyboard.key_up.e
-        return if args.state.player.unlocked_weapons.count == 1
-
-        index = args.state.player.unlocked_weapons.find_index(args.state.player.weapon)
-
-        index += 1
-        index = 0 unless index.between?(0, args.state.player.unlocked_weapons.length - 1)
-
-        args.state.player.weapon = args.state.player.unlocked_weapons[index]
-        args.state.player.selected_weapon = index
-      elsif args.inputs.keyboard.key_up.q
-        return if args.state.player.unlocked_weapons.count == 1
-
-        index = args.state.player.unlocked_weapons.find_index(args.state.player.weapon)
-
-        index -= 1
-        index = 0 if index < 0
-
-        args.state.player.weapon = args.state.player.unlocked_weapons[index]
-        args.state.player.selected_weapon = index
       else
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
       end
