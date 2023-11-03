@@ -35,16 +35,18 @@ module Scenes
           args.state.player.weapon.scout(args)
         end
       end
+
     end
 
     def self.reset(args)
+      Scenes::Game::Level.reset(args)
       Scenes::Game::Player.reset(args)
       args.state.enemies = []
       args.state.kill_count = 0
     end
 
     def self.render_player(args)
-      Scenes::Game::Player.render(args)
+      Scenes::Game::Player.init(args)
       Scenes::Game::Player.handle_movement(args)
       # Scenes::Game::Player.level_up(args)
     end
