@@ -65,15 +65,20 @@ module Scenes::Game
     end
 
     def self.render_tree(args, sprite_x, sprite_y, x, y)
-      return false unless sprite_x % 50 < 16 && sprite_y % 40 < 12
 
-      left = sprite_x - sprite_x % 50
-      right = left + 15
-      bottom = sprite_y - sprite_y % 40
-      top = bottom + 11
+      left = sprite_x - sprite_x % 20
+      bottom = sprite_y - sprite_y % 20
       r = Random.new(args.state.level.tree_seed * left * bottom)
 
-      return false if r.rand(3) == 0
+      forest_w = r.rand(10)
+      forest_h = r.rand(10)
+      forest_w += 1 if forest_w % 2 != 0
+      forest_h += 1 if forest_h % 2 != 0
+      right = left + forest_w - 1
+      top = bottom + forest_h - 1
+
+      return false unless sprite_x % 20 < forest_w && sprite_y % 20 < forest_h
+      return false if r.rand(5) == 0
 
       piece = if sprite_x == left && sprite_y % 2 == 0
                 "bottom_left"
@@ -113,7 +118,7 @@ module Scenes::Game
 
     def self.render_bush(args, sprite_x, sprite_y, x, y)
       r = Random.new(args.state.level.bush_seed * sprite_x * sprite_y)
-      return false unless r.rand(25) % 25 == 0
+      return false unless r.rand(50) % 50 == 0
 
       args.outputs.sprites << Sprites::Terrain::Bushes.tile(
         x: x,
@@ -126,7 +131,7 @@ module Scenes::Game
 
     def self.render_rock(args, sprite_x, sprite_y, x, y)
       r = Random.new(args.state.level.rock_seed * sprite_x * sprite_y)
-      return false unless r.rand(25) % 25 == 0
+      return false unless r.rand(50) % 50 == 0
 
       args.outputs.sprites << Sprites::Terrain::Rocks.tile(
         x: x,
