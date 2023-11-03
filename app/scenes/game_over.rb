@@ -118,7 +118,7 @@ module Scenes
     def self.render_main_menu_button(args)
       args.state.main_menu_button = create_button(args, x: args.grid.center_x - 75, y: 100, w: 150, h: 75, key: "main_menu")
 
-      if button_clicked? args, args.state.credits_button
+      if button_clicked? args, args.state.main_menu_button
         args.state.scene = :intro
         return
       end
