@@ -1,5 +1,6 @@
 require "app/scenes/game/camera"
 require "app/scenes/game/level"
+require "app/scenes/game/stats"
 require "app/scenes/game/weapon_selection"
 
 module Scenes
@@ -7,6 +8,7 @@ module Scenes
     def self.tick(args)
       Scenes::Game::Camera.tick(args)
       Scenes::Game::Level.tick(args)
+      Scenes::Game::Stats.tick(args)
       render_player(args)
       args.state.enemies ||= []
       args.state.dying_enemies ||= []
