@@ -39,6 +39,7 @@ module Scenes
 
       unlocked_weapons(args)
 
+      Scenes::Game::WeaponSelection.handle_weapon_switch(args)
       Scenes::Game::WeaponSelection.render_icons(args)
       Scenes::Game::WeaponSelection.render_selection_arrow(args)
     end
