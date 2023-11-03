@@ -44,11 +44,11 @@ module Sprites
       'side_dying_4' => [203, 12],
       'side_dying_5' => [249, 12],
       'up_dying_0' => [9, 12],
-      'up_dying_1' => [58, 12],
-      'up_dying_2' => [105, 12],
-      'up_dying_3' => [153, 12],
-      'up_dying_4' => [203, 12],
-      'up_dying_5' => [249, 12],
+      'up_dying_1' => [58, 22],
+      'up_dying_2' => [105, 22],
+      'up_dying_3' => [153, 22],
+      'up_dying_4' => [203, 22],
+      'up_dying_5' => [249, 22],
     }
 
     def self.tile(orc:, x:, y:, type:, flip_horizontally:)
