@@ -51,6 +51,10 @@ module Weapons
       }
     end
 
+    def self.radius
+      300
+    end
+
     def self.init_feather(args)
       args.state.feather ||= {}
       args.state.feather.angle = 180

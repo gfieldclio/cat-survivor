@@ -16,7 +16,7 @@ module Scenes
       update_enemies(args)
 
       # 1. Find the closest enemy to player within a set radius
-      if enemy = find_closest_enemy(args, 150)
+      if enemy = find_closest_enemy(args, args.state.player.weapon.radius)
         enemy.take_damage(args, args.state.player.weapon.attack(args, enemy.x, enemy.y))
         # enemy.take_damage(args, Weapons::Scratch.attack(args, enemy.x, enemy.y))
         # Weapons::Laser.attack(args, enemy.x, enemy.y)

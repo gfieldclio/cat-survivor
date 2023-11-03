@@ -28,7 +28,9 @@ module Weapons
       DAMAGE
     end
 
-    private
+    def self.radius
+      200
+    end
 
     def self.init_laser(args)
       args.state.laser.direction = rand * 360
