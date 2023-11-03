@@ -13,7 +13,7 @@ module Weapons
       laser_x = args.state.player.x + args.state.laser.relative_x
       laser_y = args.state.player.y + args.state.laser.relative_y
 
-      args.outputs.lines << [laser_x + 10, laser_y + 10, 1_000, 1_000, 255, 0, 0, 100]
+      render_laser(args, laser_x, laser_y)
     end
 
     def self.attack(args, enemy_x, enemy_y)
@@ -23,7 +23,7 @@ module Weapons
       laser_x = enemy_x
       laser_y = enemy_y
 
-      args.outputs.lines << [laser_x + 10, laser_y + 10, 1_000, 1_000, 255, 0, 0, 100]
+      render_laser(args, laser_x, laser_y)
 
       DAMAGE
     end
@@ -37,6 +37,40 @@ module Weapons
       args.state.laser.relative_x = 0
       args.state.laser.relative_y = 0
       args.state.laser.frame_count = 0
+    end
+
+    def self.render_laser(args, x, y)
+      args.outputs.lines << [x + 10, y + 10, 1_000, 1_000, 255, 0, 0, 100]
+      args.outputs.lines << [x + 10, y + 10, 1_002, 1_002, 255, 0, 0, 100]
+      args.outputs.lines << [x + 10, y + 10, 1_004, 1_004, 255, 0, 0, 100]
+      args.outputs.lines << [x + 10, y + 10, 1_006, 1_006, 255, 0, 0, 100]
+      args.outputs.lines << [x + 10, y + 10, 1_008, 1_008, 255, 0, 0, 100]
+      args.outputs.lines << [x + 10, y + 10, 1_010, 1_012, 255, 0, 0, 100]
+      args.outputs.lines << [x + 10, y + 10, 1_012, 1_014, 255, 0, 0, 100]
+      args.outputs.lines << [x + 10, y + 10, 1_014, 1_016, 255, 0, 0, 100]
+
+      start_animation_on_tick = 0
+
+      sprite_index = 
+        start_animation_on_tick.frame_index count: 10,    
+                                            hold_for: 6,  
+                                            repeat: true  
+
+      sprite_index ||= 0  
+      
+      args.outputs.sprites << {
+        x: x,
+        y: y,
+        w: 48,
+        h: 48,
+        path:  'sprites/weapons/scorch.png',
+        source_x: 32 * sprite_index,
+        source_y: 0,
+        source_w: 32,
+        source_h: 32,
+        anchor_x: 0.5,
+        anchor_y: 0.5
+      }
     end
 
     def self.move_laser_randomly_within_radius(args)

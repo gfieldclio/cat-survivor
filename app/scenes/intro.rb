@@ -101,7 +101,7 @@ module Scenes
         path: "sprites/cats/pipo-nekonin#{'%03d' % args.state.cat}.png" }
     end
 
-    def self.create_button(args, x:, y:, w:, h:, key:, tick: 0, repeat: false)
+    def self.create_button(args, x:, y:, w:, h:, key:)
 
       button = {
         rect: { x: x, y: y, w: w, h: h }

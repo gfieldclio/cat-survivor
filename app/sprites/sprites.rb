@@ -1,5 +1,6 @@
 require "app/sprites/player"
 require "app/sprites/slime"
+require "app/sprites/orc"
 require "app/sprites/terrain"
 require "app/sprites/intro_gui"
 require "app/sprites/heart"
