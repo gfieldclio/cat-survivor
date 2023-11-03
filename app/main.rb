@@ -15,6 +15,7 @@ def tick args
 
   if args.state.scene.nil?
     args.state.scene = :intro
+    args.audio[:bg_music] = { input: "audio/music/abstraction-sanctuary.ogg", looping: true }
   end
 
   case args.state.scene
