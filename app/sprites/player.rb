@@ -4,7 +4,7 @@ module Sprites
     TILE_WIDTH = 30
     TILE_HEIGHT = 32
     SPRITE_WIDTH = 60
-    SPRITE_HEIGHT = 64
+    SPRITE_HEIGHT = 62
 
     FILE_MAP = {
       "cat_1" => "pipo-nekonin001.png",

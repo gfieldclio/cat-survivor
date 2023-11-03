@@ -30,6 +30,8 @@ module Scenes::Game
       bottom_sprite = (args.state.camera.y / TERRAIN_SPRITE_SIZE) - 1
       top_sprite = bottom_sprite + (args.state.camera.h / TERRAIN_SPRITE_SIZE) + 2
 
+      args.state.level.blocking_tiles = []
+
       (left_sprite.to_i..right_sprite.to_i).each do |sprite_x|
         (bottom_sprite.to_i..top_sprite.to_i).each do |sprite_y|
           render_tile(args, sprite_x, sprite_y)
@@ -48,9 +50,18 @@ module Scenes::Game
         key: "grass"
       )
 
-      render_tree(args, sprite_x, sprite_y, x, y) ||
+      blocking = render_tree(args, sprite_x, sprite_y, x, y) ||
         render_bush(args, sprite_x, sprite_y, x, y) ||
         render_rock(args, sprite_x, sprite_y, x, y)
+
+      if blocking
+        args.state.level.blocking_tiles << {
+          x: x,
+          y: y,
+          w: TERRAIN_SPRITE_SIZE,
+          h: TERRAIN_SPRITE_SIZE,
+        }
+      end
     end
 
     def self.render_tree(args, sprite_x, sprite_y, x, y)
@@ -97,6 +108,7 @@ module Scenes::Game
         key: r.rand(2) == 0 ? "tree1" : "tree2",
         piece: piece
       )
+      true
     end
 
     def self.render_bush(args, sprite_x, sprite_y, x, y)

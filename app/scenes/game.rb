@@ -39,6 +39,9 @@ module Scenes
         end
       end
 
+      # Added this for debugging, but then for some reason collisions only work when I have this here... So made it transparent for now
+      args.outputs.primitives << {x: args.state.player.x, y: args.state.player.y, w: args.state.player.w, h: args.state.player.h, anchor_x: args.state.player.anchor_x, anchor_y: args.state.player.anchor_y, r: 255, g: 0, b: 0, a: 0}.solid
+
       unlocked_weapons(args)
 
       Scenes::Game::WeaponSelection.handle_weapon_switch(args)

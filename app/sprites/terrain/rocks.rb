@@ -25,6 +25,7 @@ module Sprites
       def self.tile(x:, y:, type:, key:)
         path = FILE_PATH + FILE_MAP[type]
         tile_x, tile_y = tile_position(key)
+        tile_y -= 1 if type == "snow"
 
         {
           x: x,
