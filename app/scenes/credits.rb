@@ -1,0 +1,116 @@
+module Scenes
+  module Credits
+    def self.tick(args)
+      if args.keyboard.key_down.enter
+        args.state.scene = :intro
+        return
+      end
+
+      render_background(args)
+      render_credits(args)
+    end
+
+    def self.render_background(args)
+      args.outputs.sprites << { x: 0, y: 0, w: 1280, h: 720, path: 'sprites/background/background_plains-Sheet1.png' }
+      scroll_point_at = args.state.tick_count
+      scroll_point_at ||= 0
+
+      args.outputs.sprites << scrolling_background(scroll_point_at, 'sprites/background/background_plains-Sheet2.png', 0.25)
+      args.outputs.sprites << scrolling_background(scroll_point_at, 'sprites/background/background_plains-Sheet3.png', 0.50)
+      args.outputs.sprites << scrolling_background(scroll_point_at, 'sprites/background/background_plains-Sheet4.png', 1.00)
+      args.outputs.sprites << scrolling_background(scroll_point_at, 'sprites/background/background_plains-Sheet5.png', 1.50)
+    end
+
+    def self.scrolling_background at, path, rate, y = 0
+      [
+        { x: 0 - at.*(rate) % 1440, y: y, w: 1440, h: 720, path: path },
+        { x: 1440 - at.*(rate) % 1440, y: y, w: 1440, h: 720, path: path }
+      ]
+    end
+
+    def self.render_credits(args)
+      line_y = 650
+      args.outputs.labels << {
+        x: args.grid.center_x,
+        y: line_y,
+        text: "Built By",
+        # size specification can be either size_enum or size_px
+        size_enum: 30,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+        alignment_enum: 1,
+        r: 155,
+        g: 50,
+        b: 50,
+        a: 255,
+        vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+        font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      line_y -= 25
+      [
+        'Yasmeen Akbari',
+        'Nimi Dharithreesan',
+        'Greg Field',
+        'Sam Markham',
+        'Mishal Zaman'
+      ].each do |name|
+        line_y -= 50
+        args.outputs.labels << {
+          x: args.grid.center_x,
+          y: line_y,
+          text: name,
+          # size specification can be either size_enum or size_px
+          size_enum: 20,
+          # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+          alignment_enum: 1,
+          r: 155,
+          g: 50,
+          b: 50,
+          a: 255,
+          vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+          font: "fonts/Abaddon_Light.ttf"
+        }
+      end
+
+      line_y -= 75
+      args.outputs.labels << {
+        x: args.grid.center_x,
+        y: line_y,
+        text: "Inspired By",
+        # size specification can be either size_enum or size_px
+        size_enum: 30,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+        alignment_enum: 1,
+        r: 155,
+        g: 50,
+        b: 50,
+        a: 255,
+        vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+        font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      line_y -= 25
+      [
+        'Vampire Survival',
+        "Our Cats <3"
+      ].each do |name|
+        line_y -= 50
+        args.outputs.labels << {
+          x: args.grid.center_x,
+          y: line_y,
+          text: name,
+          # size specification can be either size_enum or size_px
+          size_enum: 20,
+          # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+          alignment_enum: 1,
+          r: 155,
+          g: 50,
+          b: 50,
+          a: 255,
+          vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+          font: "fonts/Abaddon_Light.ttf"
+        }
+      end
+    end
+  end
+end

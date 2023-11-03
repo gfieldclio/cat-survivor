@@ -43,6 +43,7 @@ module Scenes
 
       render_cat(args)
       render_start_button(args)
+      render_credits_button(args)
       render_arrows(args)
     end
 
@@ -133,6 +134,15 @@ module Scenes
 
       args.state.right_button = create_button(args, x: right_x, y: y, w: w, h: h, key: "right")
       args.state.left_button = create_button(args, x: left_x, y: y, w: w, h: h, key: "left")
+    end
+
+    def self.render_credits_button(args)
+      args.state.credits_button = create_button(args, x: args.grid.center_x - 75, y: 10, w: 150, h: 75, key: "credits")
+
+      if button_clicked? args, args.state.credits_button
+        args.state.scene = :credits
+        return
+      end
     end
 
     def self.button_clicked? args, button
