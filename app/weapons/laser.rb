@@ -61,8 +61,8 @@ module Weapons
       args.outputs.sprites << {
         x: x,
         y: y,
-        w: 32,
-        h: 32,
+        w: 48,
+        h: 48,
         path:  'sprites/weapons/scorch.png',
         source_x: 32 * sprite_index,
         source_y: 0,
