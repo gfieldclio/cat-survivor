@@ -30,7 +30,7 @@ module Scenes
     end
 
     def self.render_credits(args)
-      line_y = 650
+      line_y = 700
       args.outputs.labels << {
         x: args.grid.center_x,
         y: line_y,
@@ -39,7 +39,7 @@ module Scenes
         size_px: 54,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
         alignment_enum: 1,
-        r: 155,
+        r: 250,
         g: 50,
         b: 50,
         a: 255,
@@ -64,7 +64,7 @@ module Scenes
           size_px: 32,
           # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
           alignment_enum: 1,
-          r: 155,
+          r: 250,
           g: 50,
           b: 50,
           a: 255,
@@ -82,7 +82,7 @@ module Scenes
         size_px: 54,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
         alignment_enum: 1,
-        r: 155,
+        r: 250,
         g: 50,
         b: 50,
         a: 255,
@@ -104,7 +104,7 @@ module Scenes
           size_px: 32,
           # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
           alignment_enum: 1,
-          r: 155,
+          r: 250,
           g: 50,
           b: 50,
           a: 255,
@@ -122,7 +122,7 @@ module Scenes
         size_px: 54,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
         alignment_enum: 1,
-        r: 155,
+        r: 250,
         g: 50,
         b: 50,
         a: 255,
@@ -132,12 +132,14 @@ module Scenes
 
       line_y -= 25
       [
+        "BDragon1727: https://bdragon1727.itch.io/basic-pixel-gui-and-buttons-pack-2",
+        "Free Game Assets: https://free-game-assets.itch.io/free-field-enemies-pixel-art-for-tower-defense",
         "kiddolink: https://kiddolink.itch.io/parallax-background-plains-pixel-art",
         "Mega Tiles: https://megatiles.itch.io/tiny-tales-overworld-2d-tileset-asset-pack",
+        "Nathan Scott: https://caffinate.itch.io/abaddon",
         "Pipoya: https://pipoya.itch.io/pipoya-free-rpg-character-sprites-nekonin",
-        "Free Game Assets: https://free-game-assets.itch.io/free-field-enemies-pixel-art-for-tower-defense",
-        "BDragon1727: https://bdragon1727.itch.io/basic-pixel-gui-and-buttons-pack-2",
-        "Nathan Scott: https://caffinate.itch.io/abaddon"
+        "Tallbeard Studios: https://tallbeard.itch.io/three-red-hearts-prepare-to-dev",
+        "VampireGirl: https://fliflifly.itch.io/hearts-and-health-bar"
       ].each do |name|
         line_y -= 25
         args.outputs.labels << {
@@ -148,7 +150,7 @@ module Scenes
           size_px: 32,
           # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
           alignment_enum: 1,
-          r: 155,
+          r: 250,
           g: 50,
           b: 50,
           a: 255,

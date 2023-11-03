@@ -17,7 +17,7 @@ module Scenes
         size_enum: 75,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
         alignment_enum: 1,
-        r: 155,
+        r: 250,
         g: 50,
         b: 50,
         a: 255,
@@ -33,7 +33,7 @@ module Scenes
         size_enum: 2,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
         alignment_enum: 1,
-        r: 155,
+        r: 250,
         g: 50,
         b: 50,
         a: 255,
