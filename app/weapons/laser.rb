@@ -1,6 +1,6 @@
 module Weapons
   module Laser
-    DAMAGE = 10.freeze
+    DAMAGE = 20.freeze
     RADIUS = 200.freeze
     SPEED = 6.freeze
     DIRECTION_CHANGE_INTERVAL = 10 # Change direction every 10 frames

@@ -1,6 +1,6 @@
 module Weapons
   module Feather
-    DAMAGE = 10.freeze
+    DAMAGE = 30.freeze
     MAX_ROTATION_ANGLE = 20.freeze  # The max rotation angle from the base angle
     ROTATION_SPEED = 1.freeze       # The speed of rotation per frame
     RADIUS = 200.freeze
