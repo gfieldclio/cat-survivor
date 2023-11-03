@@ -7,7 +7,8 @@ module Sprites
       "start" => [64, 32],
       "credits" => [80, 32],
       "right" => [32, 32],
-      "left" => [32, 32]
+      "left" => [32, 32],
+      "main_menu" => [96, 32]
     }
 
     def self.tile(x:, y:, w:, h:, key:)

@@ -8,6 +8,7 @@ module Scenes
 
       render_background(args)
       render_credits(args)
+      render_main_menu_button(args)
     end
 
     def self.render_background(args)
@@ -92,7 +93,7 @@ module Scenes
       line_y -= 25
       [
         'Vampire Survival',
-        "Our Cats <3"
+        "Our Pets <3"
       ].each do |name|
         line_y -= 25
         args.outputs.labels << {
@@ -154,6 +155,36 @@ module Scenes
           vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
           font: "fonts/Abaddon_Light.ttf"
         }
+      end
+    end
+
+    def self.create_button(args, x:, y:, w:, h:, key:)
+
+      button = {
+        rect: { x: x, y: y, w: w, h: h }
+      }
+
+      button_sprite = args.outputs.sprites << Sprites::IntroGui.tile(x: x, y: y, w: w, h: h, key: key)
+      button[:primitives] = [
+        button_sprite.sprite,
+
+      ]
+
+      args.outputs.primitives << button[:primitives]
+      button
+    end
+
+    def self.button_clicked? args, button
+      return false unless args.inputs.mouse.click
+      return args.inputs.mouse.point.inside_rect? button[:rect]
+    end
+
+    def self.render_main_menu_button(args)
+      args.state.main_menu_button = create_button(args, x: args.grid.center_x - 75, y: 10, w: 150, h: 75, key: "main_menu")
+
+      if button_clicked? args, args.state.credits_button
+        args.state.scene = :intro
+        return
       end
     end
   end
