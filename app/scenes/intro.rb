@@ -38,12 +38,14 @@ module Scenes
         else
           args.state.cat += 1
         end
+        args.outputs.sounds << "audio/effects/change.wav"
       elsif left_input(args)
         if args.state.cat === 1
           args.state.cat = 32
         else
           args.state.cat -= 1
         end
+        args.outputs.sounds << "audio/effects/change.wav"
       end
     end
 

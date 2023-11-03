@@ -85,6 +85,8 @@ module Scenes::Game
       def take_damage(args, damage)
         @health -= damage
         @started_dying_at = args.tick_count if dead?
+
+        args.state.player.weapon.play_attack_sound(args)
       end
 
       def dead?

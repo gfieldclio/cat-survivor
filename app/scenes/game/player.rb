@@ -9,6 +9,8 @@ module Scenes::Game
         args.state.scene = :game_over
         # args.state.scene = :intro
         args.audio[:bg_music] = { input: "audio/music/abstraction-save_the_city.ogg", looping: true, gain: 0.5 }
+      else
+        args.outputs.sounds << "audio/effects/hit.wav"
       end
     end
 

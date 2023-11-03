@@ -51,13 +51,13 @@ module Weapons
 
       start_animation_on_tick = 0
 
-      sprite_index = 
-        start_animation_on_tick.frame_index count: 10,    
-                                            hold_for: 6,  
-                                            repeat: true  
+      sprite_index =
+        start_animation_on_tick.frame_index count: 10,
+                                            hold_for: 6,
+                                            repeat: true
 
-      sprite_index ||= 0  
-      
+      sprite_index ||= 0
+
       args.outputs.sprites << {
         x: x,
         y: y,
@@ -94,6 +94,15 @@ module Weapons
       # Randomly change direction every DIRECTION_CHANGE_INTERVAL frames
       if args.state.laser.frame_count % DIRECTION_CHANGE_INTERVAL == 0
         args.state.laser.direction = rand * 360
+      end
+    end
+
+    def self.play_attack_sound(args)
+      args.state.weapon.playing_sound_start ||= args.state.tick_count
+      args.state.weapon.playing_sound_start = nil if args.state.tick_count > args.state.weapon.playing_sound_start + 120
+      if args.state.tick_count == args.state.weapon.playing_sound_start
+        args.outputs.sounds << "audio/effects/laser.wav" if args.state.tick_count == args.state.weapon.playing_sound_start
+        puts "Sound played at #{args.state.tick_count}"
       end
     end
   end

@@ -19,13 +19,13 @@ module Scenes::Game
     def self.render_selection_arrow(args)
       start_animation_on_tick = 0
 
-      sprite_index = 
+      sprite_index =
         start_animation_on_tick.frame_index count: 12,    # how many sprites?
                                             hold_for: 2,  # how long to hold each sprite?
                                             repeat: true  # should it repeat?
 
       sprite_index ||= 0
-      
+
       args.outputs.sprites << {
         x: selection_level_x[args.state.player.selected_weapon],
         y: 140,
@@ -70,6 +70,7 @@ module Scenes::Game
 
         args.state.player.weapon = args.state.player.unlocked_weapons[index]
         args.state.player.selected_weapon = index
+        args.outputs.sounds << "audio/effects/change.wav"
       elsif args.inputs.keyboard.key_up.q
         return if args.state.player.unlocked_weapons.count == 1
 
@@ -80,6 +81,7 @@ module Scenes::Game
 
         args.state.player.weapon = args.state.player.unlocked_weapons[index]
         args.state.player.selected_weapon = index
+        args.outputs.sounds << "audio/effects/change.wav"
       end
     end
 

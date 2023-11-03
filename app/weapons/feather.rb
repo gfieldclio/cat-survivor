@@ -87,5 +87,14 @@ module Weapons
         args.state.feather.direction = rand * 360
       end
     end
+
+    def self.play_attack_sound(args)
+      args.state.weapon.playing_sound_start ||= args.state.tick_count
+      args.state.weapon.playing_sound_start = nil if args.state.tick_count > args.state.weapon.playing_sound_start + 120
+      if args.state.tick_count == args.state.weapon.playing_sound_start
+        args.outputs.sounds << "audio/effects/feather.wav" if args.state.tick_count == args.state.weapon.playing_sound_start
+        puts "Sound played at #{args.state.tick_count}"
+      end
+    end
   end
 end
