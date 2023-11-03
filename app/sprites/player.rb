@@ -40,44 +40,82 @@ module Sprites
       "cat_31" => "pipo-nekonin031.png",
       "cat_32" => "pipo-nekonin032.png",
     }
-
+    # Point to bottom middle since it's a consistent location for all sprites
     PLAYER_SPRITE_MAP = {
-      'down_walk_1' => [1, 0],
-      'down_walk_2' => [65, 0],
-      'down_still' => [33, 0],
-      'left_walk_1' => [1, 32],
-      'left_walk_2' => [65, 32],
-      'left_still' => [33, 32],
-      'right_walk_1' => [1, 64],
-      'right_walk_2' => [65, 64],
-      'right_still' => [33, 64],
-      'up_walk_1' => [1, 96],
-      'up_walk_2' => [65, 96],
-      'up_still' => [33, 96]
+      'down_walk_1' => [16, 32],
+      'down_walk_2' => [80, 32],
+      'down_still' => [48, 31],
+      'left_walk_1' => [16, 64],
+      'left_walk_2' => [80, 64],
+      'left_still' => [48, 63],
+      'right_walk_1' => [16, 96],
+      'right_walk_2' => [80, 96],
+      'right_still' => [48, 95],
+      'up_walk_1' => [16, 128],
+      'up_walk_2' => [80, 128],
+      'up_still' => [48, 127]
+    }
+    TILE_SIZES = {
+      "cat_1" => [20, 25],
+      "cat_2" => [20, 25],
+      "cat_3" => [20, 25],
+      "cat_4" => [20, 25],
+      "cat_5" => [20, 25],
+      "cat_6" => [20, 25],
+      "cat_7" => [20, 25],
+      "cat_8" => [20, 25],
+      "cat_9" => [20, 25],
+      "cat_10" => [23, 28],
+      "cat_11" => [20, 25],
+      "cat_12" => [20, 25],
+      "cat_13" => [24, 30],
+      "cat_14" => [21, 25],
+      "cat_15" => [30, 30],
+      "cat_16" => [17, 24],
+      "cat_17" => [17, 24],
+      "cat_18" => [17, 24],
+      "cat_19" => [29, 31],
+      "cat_20" => [29, 24],
+      "cat_21" => [21, 29],
+      "cat_22" => [21, 27],
+      "cat_23" => [21, 27],
+      "cat_24" => [20, 25],
+      "cat_25" => [20, 25],
+      "cat_26" => [31, 31],
+      "cat_27" => [31, 27],
+      "cat_28" => [21, 25],
+      "cat_29" => [19, 28],
+      "cat_30" => [31, 31],
+      "cat_31" => [21, 30],
+      "cat_32" => [23, 28],
     }
 
     # change these with key presses
     def self.tile(x:, y:, type:, key:)
       path = FILE_PATH + FILE_MAP[type]
-      tile_x, tile_y = sprite_position(key)
+      tile_x, tile_y = sprite_position(type, key)
+      tile_w, tile_h = TILE_SIZES[type]
 
       {
         x: x,
         y: y,
-        w: SPRITE_WIDTH,
-        h: SPRITE_HEIGHT,
+        w: tile_w * 2,
+        h: tile_h * 2,
         tile_x: tile_x,
         tile_y: tile_y,
-        tile_w: TILE_WIDTH,
-        tile_h: TILE_HEIGHT,
+        tile_w: tile_w,
+        tile_h: tile_h,
         path: path,
         anchor_x: 0.5,
         anchor_y: 0.5
       }
     end
 
-    def self.sprite_position(key)
-      PLAYER_SPRITE_MAP[key]
+    def self.sprite_position(type, key)
+      x, y = PLAYER_SPRITE_MAP[key]
+      x -= TILE_SIZES[type][0] / 2
+      y -= TILE_SIZES[type][1]
+      [x, y]
     end
   end
 end
