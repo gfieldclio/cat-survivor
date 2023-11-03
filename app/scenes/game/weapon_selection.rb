@@ -82,5 +82,87 @@ module Scenes::Game
         args.state.player.selected_weapon = index
       end
     end
+
+    def self.render_instructions(args)
+      args.outputs.labels << {
+        x: args.grid.center_x + 1,
+        y: 30,
+        text: "Use Q and E to toggle weapons",
+        # size specification can be either size_enum or size_px
+        size_enum: 5,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+        alignment_enum: 1,
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 255,
+        vertical_alignment_enum: 0, # 0 is bottom, 1 is middle, 2 is top
+        font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << {
+        x: args.grid.center_x - 1,
+        y: 30,
+        text: "Use Q and E to toggle weapons",
+        # size specification can be either size_enum or size_px
+        size_enum: 5,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+        alignment_enum: 1,
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 255,
+        vertical_alignment_enum: 0, # 0 is bottom, 1 is middle, 2 is top
+        font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << {
+        x: args.grid.center_x,
+        y: 30 + 1,
+        text: "Use Q and E to toggle weapons",
+        # size specification can be either size_enum or size_px
+        size_enum: 5,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+        alignment_enum: 1,
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 255,
+        vertical_alignment_enum: 0, # 0 is bottom, 1 is middle, 2 is top
+        font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << {
+        x: args.grid.center_x,
+        y: 30 - 1,
+        text: "Use Q and E to toggle weapons",
+        # size specification can be either size_enum or size_px
+        size_enum: 5,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+        alignment_enum: 1,
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 255,
+        vertical_alignment_enum: 0, # 0 is bottom, 1 is middle, 2 is top
+        font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << {
+        x: args.grid.center_x,
+        y: 30,
+        text: "Use Q and E to toggle weapons",
+        # size specification can be either size_enum or size_px
+        size_enum: 5,
+        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+        alignment_enum: 1,
+        r: 255,
+        g: 255,
+        b: 255,
+        a: 255,
+        vertical_alignment_enum: 0, # 0 is bottom, 1 is middle, 2 is top
+        font: "fonts/Abaddon_Bold.ttf"
+      }
+    end
   end
 end

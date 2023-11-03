@@ -4,7 +4,7 @@ module Scenes::Game
       # Level
 
       args.outputs.labels << { # shadow 1
-        x: 750 + 1,
+        x: 900 + 1,
         y: 75,
         text: "Level: " + args.state.player.level.to_s,
         # size specification can be either size_enum or size_px
@@ -20,7 +20,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << { # shadow 2
-        x: 750 - 1,
+        x: 900 - 1,
         y: 75,
         text: "Level: " + args.state.player.level.to_s,
         # size specification can be either size_enum or size_px
@@ -36,7 +36,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << { # shadow 3
-        x: 750,
+        x: 900,
         y: 75 + 1,
         text: "Level: " + args.state.player.level.to_s,
         # size specification can be either size_enum or size_px
@@ -52,7 +52,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << { # shadow 4
-        x: 750,
+        x: 900,
         y: 75 - 1,
         text: "Level: " + args.state.player.level.to_s,
         # size specification can be either size_enum or size_px
@@ -68,7 +68,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << { # main text
-        x: 750,
+        x: 900,
         y: 75,
         text: "Level: " + args.state.player.level.to_s,
         # size specification can be either size_enum or size_px
@@ -83,10 +83,10 @@ module Scenes::Game
         font: "fonts/Abaddon_Bold.ttf"
       }
 
-      # Kill count
+      # EXP
 
       args.outputs.labels << {
-        x: 900 + 1,
+        x: 1050 + 1,
         y: 75,
         text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
@@ -102,7 +102,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << {
-        x: 900 - 1,
+        x: 1050 - 1,
         y: 75,
         text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
@@ -118,7 +118,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << {
-        x: 900,
+        x: 1050,
         y: 75 + 1,
         text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
@@ -134,7 +134,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << {
-        x: 900,
+        x: 1050,
         y: 75 - 1,
         text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
@@ -150,7 +150,7 @@ module Scenes::Game
       }
 
       args.outputs.labels << {
-        x: 900,
+        x: 1050,
         y: 75,
         text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px

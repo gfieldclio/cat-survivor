@@ -3,7 +3,7 @@ module Scenes
     def self.tick(args)
       if args.keyboard.key_down.enter
         args.state.scene = :intro
-        args.audio[:bg_music] = { input: "audio/music/abstraction-sanctuary.ogg", looping: true }
+        args.audio[:bg_music] = { input: "audio/music/abstraction-sanctuary.ogg", looping: true, gain: 0.5 }
         return
       end
 
@@ -11,6 +11,7 @@ module Scenes
       render_cat(args)
       render_text(args)
       render_main_menu_button(args)
+      render_stats(args)
     end
 
     def self.render_cat(args)
@@ -68,7 +69,7 @@ module Scenes
         text: "Game Over",
         size_enum: 30,
         alignment_enum: 1,
-        r: 155,
+        r: 255,
         g: 50,
         b: 50,
         a: 255,
@@ -84,7 +85,7 @@ module Scenes
         text: "Press Enter to return to the title screen.",
         size_enum: 2,
         alignment_enum: 1,
-        r: 155,
+        r: 255,
         g: 50,
         b: 50,
         a: 255,
@@ -123,6 +124,28 @@ module Scenes
         args.state.scene = :intro
         return
       end
+    end
+
+    def self.render_stats(args)
+      primitives = [
+        {
+          x: args.grid.center_x,
+          y: 350,
+          text: "Highest Level: #{args.state.player.level}   EXP Earned: #{args.state.exp}",
+          size_enum: 2,
+          alignment_enum: 1,
+          r: 255,
+          g: 50,
+          b: 50,
+          a: 255,
+          vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+          anchor_x: 0.5,
+          anchor_y: 0.5,
+          font: "fonts/Abaddon_Bold.ttf"
+        }.label
+      ]
+
+      args.outputs.primitives << primitives
     end
   end
 end
