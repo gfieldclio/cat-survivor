@@ -1,5 +1,6 @@
 require "app/scenes/game/camera"
 require "app/scenes/game/level"
+require "app/scenes/game/weapon_selection"
 
 module Scenes
   module Game
@@ -35,6 +36,11 @@ module Scenes
           args.state.player.weapon.scout(args)
         end
       end
+
+      unlocked_weapons(args)
+
+      Scenes::Game::WeaponSelection.render_icons(args)
+      Scenes::Game::WeaponSelection.render_selection_arrow(args)
     end
 
     def self.reset(args)
@@ -83,6 +89,16 @@ module Scenes
 
     def self.distance_to(args, enemy_x, enemy_y)
       Math.sqrt((enemy_x - args.state.player.x)**2 + (enemy_y - args.state.player.y)**2)
+    end
+
+    def self.unlocked_weapons(args)
+      if args.state.player.level < 3
+        args.state.player.unlocked_weapons = [Weapons::Scratch]
+      elsif args.state.player.level < 5
+        args.state.player.unlocked_weapons = [Weapons::Scratch, Weapons::Laser]
+      elsif args.state.player.level >= 5
+        args.state.player.unlocked_weapons = [Weapons::Scratch, Weapons::Laser, Weapons::Feather]
+      end
     end
   end
 end
