@@ -4,7 +4,7 @@ module Scenes::Game
       attr_accessor :x, :y, :w, :h, :health, :started_running_at, :started_dying_at, :damage
 
       STARTING_HEALTH = 1250.freeze
-      SPEED = 2.5.freeze
+      SPEED = 2.30.freeze
       STARTING_DAMAGE = 10.freeze
 
       def initialize(args)
