@@ -9,37 +9,13 @@ module Scenes
         select_cat(args)
       end
 
-      args.outputs.labels << {
-        x: args.grid.center_x,
-        y: 600,
-        text: "Cat Survivor",
-        # size specification can be either size_enum or size_px
-        size_enum: 75,
-        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-        alignment_enum: 1,
-        r: 250,
-        g: 50,
-        b: 50,
-        a: 255,
-        vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-        font: "fonts/Abaddon_Bold.ttf"
-      }
-
-      args.outputs.labels << {
-        x: args.grid.center_x,
-        y: 400,
-        text: "Select a cat with the Left or Right keys, then press Enter to start the game!",
-        # size specification can be either size_enum or size_px
-        size_enum: 2,
-        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-        alignment_enum: 1,
-        r: 250,
-        g: 50,
-        b: 50,
-        a: 255,
-        vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-        font: "fonts/Abaddon_Light.ttf"
-      }
+      render_shadow_text(args, x: args.grid.center_x, y: 600, text: "Cat Survivor", size_enum: 75, offset: 2)
+      render_shadow_text(args,
+                         x: args.grid.center_x,
+                         y: 400,
+                         text: "Select a cat with the Left or Right keys, then press Enter to start the game!",
+                         size_enum: 5,
+                         offset: 1)
 
       render_cat(args)
       render_start_button(args)
@@ -166,6 +142,88 @@ module Scenes
         { x: 0 - at.*(rate) % 1440, y: y, w: 1440, h: 720, path: path },
         { x: 1440 - at.*(rate) % 1440, y: y, w: 1440, h: 720, path: path }
       ]
+    end
+
+    def self.render_shadow_text(args, x:, y:, text:, size_enum:, offset:)
+      args.outputs.labels << { # shadow 1
+                               x: x + offset,
+                               y: y,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_enum: size_enum,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << { # shadow 2
+                               x: x - offset,
+                               y: y,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_enum: size_enum,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << { # shadow 3
+                               x: x,
+                               y: y + offset,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_enum: size_enum,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << { # shadow 4
+                               x: x,
+                               y: y - offset,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_enum: size_enum,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: "fonts/Abaddon_Bold.ttf"
+      }
+
+      args.outputs.labels << { # main text
+                               x: x,
+                               y: y,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_enum: size_enum,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 250,
+                               g: 50,
+                               b: 50,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: "fonts/Abaddon_Bold.ttf"
+      }
     end
   end
 end
