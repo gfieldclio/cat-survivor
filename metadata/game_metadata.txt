@@ -1,10 +1,10 @@
 # Remove the pound sign and leading space for the properties below before publishing your game.
-# devid=myname
-# devtitle=My Name
+devid=catsurvivorteam
+devtitle=Cat Survivor Team
 gameid=catsurvivor
 gametitle=Cat Survivor
-# version=0.1
-# icon=metadata/icon.png
+version=0.15
+icon=metadata/cat_logo.png
 
 # === Flags available at all licensing tiers ===
 
