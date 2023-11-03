@@ -5,7 +5,7 @@ module Scenes
       args.state.cat ||= 1
 
       cycle_cats(args)
-      if args.keyboard.enter || args.controller_one.x
+      if args.keyboard.key_down.enter || args.controller_one.x
         select_cat(args)
       end
 

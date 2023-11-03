@@ -2,6 +2,7 @@ require "app/constants"
 require "app/sprites/sprites"
 require "app/scenes/intro"
 require "app/scenes/game"
+require "app/scenes/game_over"
 require "app/scenes/game/enemies/slime"
 require "app/scenes/game/player"
 require "app/weapons/scratch"
@@ -20,5 +21,7 @@ def tick args
     Scenes::Intro.tick(args)
   when :game
     Scenes::Game.tick(args)
+  when :game_over
+    Scenes::GameOver.tick(args)
   end
 end

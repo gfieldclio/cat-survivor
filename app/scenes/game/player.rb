@@ -7,8 +7,8 @@ module Scenes::Game
       puts args.state.player.health
       if args.state.player.health < 0
         # death animation?
-        # args.state.scene = :game_over
-        args.state.scene = :intro
+        args.state.scene = :game_over
+        # args.state.scene = :intro
       end
     end
 
