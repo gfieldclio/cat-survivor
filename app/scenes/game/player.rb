@@ -40,48 +40,69 @@ module Scenes::Game
     end
 
     def self.handle_movement(args)
+      update_position(args)
+      render(args)
+    end
+
+    def self.update_position(args)
+      dx, dy = if args.inputs.keyboard.left && args.inputs.keyboard.up
+                 [-2, 2]
+               elsif args.inputs.keyboard.left && args.inputs.keyboard.down
+                 [-2, -2]
+               elsif args.inputs.keyboard.right && args.inputs.keyboard.up
+                 [2, 2]
+               elsif args.inputs.keyboard.right && args.inputs.keyboard.down
+                 [2, -2]
+               elsif args.inputs.keyboard.left
+                 [-3, 0]
+               elsif args.inputs.keyboard.right
+                 [3, 0]
+               elsif args.inputs.keyboard.up
+                 [0, 3]
+               elsif args.inputs.keyboard.down
+                 [0, -3]
+               else
+                 [0, 0]
+               end
+
+      on_blocking_tile =  args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(args.state.player) }
+
+      args.state.player.x += dx
+      args.state.player.y += dy
+
+      # Don't prevent movement if the character was already on a blocking tile
+      return if on_blocking_tile
+
+      args.state.level.blocking_tiles.each do |tile|
+        if tile.intersect_rect?(args.state.player)
+          args.state.player.x -= dx
+          args.state.player.y -= dy
+        end
+      end
+    end
+
+    def self.render(args)
       if args.inputs.keyboard.left
         args.state.player.key = "left_walk_1"
         toggle_on_iteration(args)
-        args.state.player.x -= 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
 
         if args.inputs.keyboard.key_up.left
           args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: "left_still")
           args.state.player.key = "left_still"
         end
-
-        if args.inputs.keyboard.down
-          args.state.player.y -= 2
-          args.state.player.x += 1
-        end
-        if args.inputs.keyboard.up
-          args.state.player.y += 2
-          args.state.player.x += 1
-        end
       elsif args.inputs.keyboard.right
         args.state.player.key = "right_walk_1"
         toggle_on_iteration(args)
-        args.state.player.x += 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
 
         if args.inputs.keyboard.key_up.right
           args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: "right_still")
           args.state.player.key = "right_still"
         end
-
-        if args.inputs.keyboard.down
-          args.state.player.y -= 2
-          args.state.player.x -= 1
-        end
-        if args.inputs.keyboard.up
-          args.state.player.y += 2
-          args.state.player.x -= 1
-        end
       elsif args.inputs.keyboard.up
         args.state.player.key = "up_walk_1"
         toggle_on_iteration(args)
-        args.state.player.y += 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
 
         if args.inputs.keyboard.key_up.up
@@ -91,7 +112,6 @@ module Scenes::Game
       elsif args.inputs.keyboard.down
         args.state.player.key = "down_walk_1"
         toggle_on_iteration(args)
-        args.state.player.y -= 3
         args.outputs.sprites << Sprites::Player.tile(x: args.state.player.x, y: args.state.player.y, type: args.state.player.cat_type, key: args.state.player.key)
 
         if args.inputs.keyboard.key_up.down
