@@ -76,7 +76,7 @@ module Scenes
       args.state.player.cat_type = "cat_#{args.state.cat}"
       args.state.player.health = 500
       args.state.scene = :game
-      args.audio[:bg_music] = { input: "audio/music/abstraction-box_jump.ogg", looping: true }
+      args.audio[:bg_music] = { input: "audio/music/abstraction-box_jump.ogg", looping: true, gain: 0.5 }
     end
 
     def self.render_cat(args)
