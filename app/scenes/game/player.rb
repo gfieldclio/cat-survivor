@@ -4,7 +4,6 @@ module Scenes::Game
     def self.take_damage(args, enemy)
       # puts enemy
       args.state.player.health -= 5 # replace with whatever damage diff enemies do
-      puts args.state.player.health
       if args.state.player.health < 0
         # death animation?
         args.state.scene = :game_over
