@@ -1,7 +1,7 @@
 module Scenes::Game
   module Enemies
     class Orc
-      attr_accessor :x, :y, :w, :h, :health, :started_running_at, :started_dying_at, :damage
+      attr_accessor :x, :y, :w, :h, :anchor_x, :anchor_y, :health, :started_running_at, :started_dying_at, :damage
 
       STARTING_HEALTH = 1250.freeze
       SPEED = 2.30.freeze
@@ -13,6 +13,8 @@ module Scenes::Game
         @damage = STARTING_DAMAGE
         @w = 45
         @h = 45
+        @anchor_x = 0.5
+        @anchor_y = 0.5
         @started_running_at = args.tick_count
         @current_direction = "side"
         @flip_horizontally = false
@@ -32,7 +34,7 @@ module Scenes::Game
           @y = @y > args.state.player.y ? @y + radius : @y - radius
         end
       end
-      
+
       def move(args, target_x, target_y)
         return animate_dying(args) if dead?
 
@@ -40,32 +42,36 @@ module Scenes::Game
         x_vector = Math.cos(angle) * SPEED
         y_vector = Math.sin(angle) * SPEED
 
-        @x += x_vector
-        @y += y_vector
+        on_blocking_tile =  args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+        if on_blocking_tile
+          @x += x_vector
+          @y += y_vector
+        else
+          @x += x_vector
+          @x -= x_vector if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+          @y += y_vector
+          @y -= y_vector if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+        end
 
         if y_vector < 0 && x_vector.abs < y_vector.abs
           @started_running_at = args.tick_count if @current_direction != "down"
           @flip_horizontally = false
-          render(args, "down_walking", @flip_horizontally)
           @current_direction = "down"
         elsif y_vector > 0 && x_vector.abs < y_vector.abs
           @started_running_at = args.tick_count if @current_direction != "up"
           @flip_horizontally = false
-          render(args, "up_walking", @flip_horizontally)
           @current_direction = "up"
         elsif x_vector > 0
           @started_running_at = args.tick_count if @current_direction != "side" && !@flip_horizontally
           @flip_horizontally = true
-          render(args, "side_walking", @flip_horizontally)
           @current_direction = "side"
         else
           @started_running_at = args.tick_count if @current_direction != "side" && @flip_horizontally
           @flip_horizontally = false
-          render(args, "side_walking", @flip_horizontally)
           @current_direction = "side"
         end
 
-        
+        render(args, "#{@current_direction}_walking", @flip_horizontally)
       end
 
       def dying_in_progress?(args)

@@ -66,18 +66,14 @@ module Scenes::Game
                end
 
       on_blocking_tile =  args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(args.state.player) }
-
-      args.state.player.x += dx
-      args.state.player.y += dy
-
-      # Don't prevent movement if the character was already on a blocking tile
-      return if on_blocking_tile
-
-      args.state.level.blocking_tiles.each do |tile|
-        if tile.intersect_rect?(args.state.player)
-          args.state.player.x -= dx
-          args.state.player.y -= dy
-        end
+      if on_blocking_tile
+        args.state.player.x += dx
+        args.state.player.y += dy
+      else
+        args.state.player.x += dx
+        args.state.player.x -= dx if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(args.state.player) }
+        args.state.player.y += dy
+        args.state.player.y -= dy if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(args.state.player) }
       end
     end
 
