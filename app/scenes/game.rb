@@ -72,18 +72,26 @@ module Scenes
         end
       end
 
-      args.state.dying_enemies.delete_if { |enemy| !enemy.animate_dying_in_progress?(args) }
+      args.state.dying_enemies.delete_if { |enemy| !enemy.dying_in_progress?(args) }
     end
 
     def self.generate_enemies(args)
       srand
-      random_amount = rand(10) * (args.state.player.level/2).to_i
-      random_amount = 5 if random_amount == 0
+      random_amount = [1, rand(10)].max * (args.state.player.level/2).ceil
       enemies = []
 
       random_amount.times do
         enemies << Scenes::Game::Enemies::Slime.new(args)
       end
+
+      # Add tougher enemies at higher levels
+      if args.state.player.level >= 2
+        num_of_orcs = [1, rand(3)].max * (args.state.player.level/2).ceil
+        num_of_orcs.times do
+          enemies << Scenes::Game::Enemies::Orc.new(args)
+        end
+      end
+
       enemies
     end
 

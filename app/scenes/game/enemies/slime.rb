@@ -1,15 +1,16 @@
 module Scenes::Game
   module Enemies
     class Slime
-      attr_accessor :x, :y, :w, :h, :health, :started_running_at, :started_dying_at
+      attr_accessor :x, :y, :w, :h, :health, :started_running_at, :started_dying_at, :damage
 
       STARTING_HEALTH = 300.freeze
       SPEED = 2.freeze
-      # DAMAGE = 10.freeze
+      STARTING_DAMAGE = 5.freeze
 
       def initialize(args)
         set_starting_position(args)
         @health = STARTING_HEALTH
+        @damage = STARTING_DAMAGE
         @w = 32
         @h = 32
         @started_running_at = args.tick_count
@@ -40,7 +41,7 @@ module Scenes::Game
         render(args, "walking")
       end
 
-      def animate_dying_in_progress?(args)
+      def dying_in_progress?(args)
         tile = Sprites::Slime.tile(slime: self, x: @x, y: @y, type: "dying")
         return false if tile.nil?
         args.outputs.sprites << tile
