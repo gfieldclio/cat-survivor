@@ -56,26 +56,22 @@ module Scenes::Game
         if y_vector < 0 && x_vector.abs < y_vector.abs
           @started_running_at = args.tick_count if @current_direction != "down"
           @flip_horizontally = false
-          render(args, "down_walking", @flip_horizontally)
           @current_direction = "down"
         elsif y_vector > 0 && x_vector.abs < y_vector.abs
           @started_running_at = args.tick_count if @current_direction != "up"
           @flip_horizontally = false
-          render(args, "up_walking", @flip_horizontally)
           @current_direction = "up"
         elsif x_vector > 0
           @started_running_at = args.tick_count if @current_direction != "side" && !@flip_horizontally
           @flip_horizontally = true
-          render(args, "side_walking", @flip_horizontally)
           @current_direction = "side"
         else
           @started_running_at = args.tick_count if @current_direction != "side" && @flip_horizontally
           @flip_horizontally = false
-          render(args, "side_walking", @flip_horizontally)
           @current_direction = "side"
         end
 
-
+        render(args, "#{@current_direction}_walking", @flip_horizontally)
       end
 
       def dying_in_progress?(args)
