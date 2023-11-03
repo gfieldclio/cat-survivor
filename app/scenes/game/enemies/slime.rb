@@ -1,7 +1,7 @@
 module Scenes::Game
   module Enemies
     class Slime
-      attr_accessor :x, :y, :w, :h, :health, :started_running_at, :started_dying_at, :damage
+      attr_accessor :x, :y, :w, :h, :anchor_x, :anchor_y, :health, :started_running_at, :started_dying_at, :damage
 
       STARTING_HEALTH = 300.freeze
       SPEED = 2.freeze
@@ -13,6 +13,8 @@ module Scenes::Game
         @damage = STARTING_DAMAGE
         @w = 32
         @h = 32
+        @anchor_x = 0.5
+        @anchor_y = 0.5
         @started_running_at = args.tick_count
         render(args, "walking")
       end
