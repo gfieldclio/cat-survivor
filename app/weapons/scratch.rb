@@ -35,7 +35,9 @@ module Weapons
         source_x: 32 * sprite_index,
         source_y: 0,
         source_w: 32,
-        source_h: 32
+        source_h: 32,
+        anchor_x: 0.5,
+        anchor_y: 0.5
       }
     end
 
