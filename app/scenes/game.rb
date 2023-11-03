@@ -8,11 +8,10 @@ module Scenes
     def self.tick(args)
       Scenes::Game::Camera.tick(args)
       Scenes::Game::Level.tick(args)
-      Scenes::Game::Stats.tick(args)
       render_player(args)
       args.state.enemies ||= []
       args.state.dying_enemies ||= []
-      args.state.kill_count ||= 0
+      args.state.exp ||= 0
 
       args.state.enemies = generate_enemies(args) if args.state.enemies.empty?
       update_enemies(args)
@@ -27,9 +26,17 @@ module Scenes
         # destroy enemy from pool of enemies
         if enemy.dead?
           args.state.dying_enemies << args.state.enemies.delete(enemy)
-          args.state.kill_count += 1
-          if args.state.kill_count % 30 == 0
+          if enemy.type == "slime"
+            args.state.exp += 10
+          elsif enemy.type == "orc"
+            args.state.exp += 25
+          end
+
+          if args.state.exp % 300 == 0
             args.state.player.level += 1
+            if args.state.player.health <= 400
+              args.state.player.health += 100
+            end
           end
         end
       else
@@ -46,13 +53,14 @@ module Scenes
       Scenes::Game::WeaponSelection.handle_weapon_switch(args)
       Scenes::Game::WeaponSelection.render_icons(args)
       Scenes::Game::WeaponSelection.render_selection_arrow(args)
+      Scenes::Game::Stats.tick(args)
     end
 
     def self.reset(args)
       Scenes::Game::Level.reset(args)
       Scenes::Game::Player.reset(args)
       args.state.enemies = []
-      args.state.kill_count = 0
+      args.state.exp = 0
     end
 
     def self.render_player(args)

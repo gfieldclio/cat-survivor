@@ -88,7 +88,7 @@ module Scenes::Game
       args.outputs.labels << {
         x: 900 + 1,
         y: 75,
-        text: "Enemies defeated: " + args.state.kill_count.to_s,
+        text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
         size_enum: 10,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
@@ -104,7 +104,7 @@ module Scenes::Game
       args.outputs.labels << {
         x: 900 - 1,
         y: 75,
-        text: "Enemies defeated: " + args.state.kill_count.to_s,
+        text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
         size_enum: 10,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
@@ -120,7 +120,7 @@ module Scenes::Game
       args.outputs.labels << {
         x: 900,
         y: 75 + 1,
-        text: "Enemies defeated: " + args.state.kill_count.to_s,
+        text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
         size_enum: 10,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
@@ -136,7 +136,7 @@ module Scenes::Game
       args.outputs.labels << {
         x: 900,
         y: 75 - 1,
-        text: "Enemies defeated: " + args.state.kill_count.to_s,
+        text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
         size_enum: 10,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
@@ -152,7 +152,7 @@ module Scenes::Game
       args.outputs.labels << {
         x: 900,
         y: 75,
-        text: "Enemies defeated: " + args.state.kill_count.to_s,
+        text: "EXP: " + args.state.exp.to_s,
         # size specification can be either size_enum or size_px
         size_enum: 10,
         # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".

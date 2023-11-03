@@ -1,7 +1,7 @@
 module Scenes::Game
   module Enemies
     class Orc
-      attr_accessor :x, :y, :w, :h, :anchor_x, :anchor_y, :health, :started_running_at, :started_dying_at, :damage
+      attr_accessor :x, :y, :w, :h, :anchor_x, :anchor_y, :health, :started_running_at, :started_dying_at, :damage, :type
 
       STARTING_HEALTH = 1250.freeze
       SPEED = 2.30.freeze
@@ -18,6 +18,7 @@ module Scenes::Game
         @started_running_at = args.tick_count
         @current_direction = "side"
         @flip_horizontally = false
+        @type = "orc"
         render(args, "side_walking", @flip_horizontally)
       end
 
