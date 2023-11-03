@@ -53,6 +53,7 @@ module Scenes
       Scenes::Game::WeaponSelection.handle_weapon_switch(args)
       Scenes::Game::WeaponSelection.render_icons(args)
       Scenes::Game::WeaponSelection.render_selection_arrow(args)
+      Scenes::Game::WeaponSelection.render_instructions(args)
       Scenes::Game::Stats.tick(args)
     end
 
