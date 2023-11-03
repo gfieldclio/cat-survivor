@@ -31,21 +31,8 @@ module Scenes
 
     def self.render_credits(args)
       line_y = 700
-      args.outputs.labels << {
-        x: args.grid.center_x,
-        y: line_y,
-        text: "Built By",
-        # size specification can be either size_enum or size_px
-        size_px: 54,
-        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-        alignment_enum: 1,
-        r: 250,
-        g: 50,
-        b: 50,
-        a: 255,
-        vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-        font: "fonts/Abaddon_Bold.ttf"
-      }
+
+      render_shadow_text(args, x: args.grid.center_x, y: line_y, text: "Built By", size_px: 54, offset: 2, font: "bold")
 
       line_y -= 25
       [
@@ -56,39 +43,12 @@ module Scenes
         'Mishal Zaman'
       ].each do |name|
         line_y -= 25
-        args.outputs.labels << {
-          x: args.grid.center_x,
-          y: line_y,
-          text: name,
-          # size specification can be either size_enum or size_px
-          size_px: 32,
-          # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-          alignment_enum: 1,
-          r: 250,
-          g: 50,
-          b: 50,
-          a: 255,
-          vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-          font: "fonts/Abaddon_Light.ttf"
-        }
+        render_shadow_text(args, x: args.grid.center_x, y: line_y, text: name, size_px: 32, offset: 0, font: "light")
       end
 
       line_y -= 50
-      args.outputs.labels << {
-        x: args.grid.center_x,
-        y: line_y,
-        text: "Inspired By",
-        # size specification can be either size_enum or size_px
-        size_px: 54,
-        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-        alignment_enum: 1,
-        r: 250,
-        g: 50,
-        b: 50,
-        a: 255,
-        vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-        font: "fonts/Abaddon_Bold.ttf"
-      }
+
+      render_shadow_text(args, x: args.grid.center_x, y: line_y, text: "Inspired By", size_px: 54, offset: 2, font: "bold")
 
       line_y -= 25
       [
@@ -96,39 +56,12 @@ module Scenes
         "Our Pets <3"
       ].each do |name|
         line_y -= 25
-        args.outputs.labels << {
-          x: args.grid.center_x,
-          y: line_y,
-          text: name,
-          # size specification can be either size_enum or size_px
-          size_px: 32,
-          # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-          alignment_enum: 1,
-          r: 250,
-          g: 50,
-          b: 50,
-          a: 255,
-          vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-          font: "fonts/Abaddon_Light.ttf"
-        }
+        render_shadow_text(args, x: args.grid.center_x, y: line_y, text: name, size_px: 32, offset: 0, font: "light")
       end
 
       line_y -= 50
-      args.outputs.labels << {
-        x: args.grid.center_x,
-        y: line_y,
-        text: "Assets By",
-        # size specification can be either size_enum or size_px
-        size_px: 54,
-        # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-        alignment_enum: 1,
-        r: 250,
-        g: 50,
-        b: 50,
-        a: 255,
-        vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-        font: "fonts/Abaddon_Bold.ttf"
-      }
+
+      render_shadow_text(args, x: args.grid.center_x, y: line_y, text: "Assets By", size_px: 54, offset: 2, font: "bold")
 
       line_y -= 25
       [
@@ -142,21 +75,7 @@ module Scenes
         "VampireGirl: https://fliflifly.itch.io/hearts-and-health-bar"
       ].each do |name|
         line_y -= 25
-        args.outputs.labels << {
-          x: args.grid.center_x,
-          y: line_y,
-          text: name,
-          # size specification can be either size_enum or size_px
-          size_px: 32,
-          # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
-          alignment_enum: 1,
-          r: 250,
-          g: 50,
-          b: 50,
-          a: 255,
-          vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
-          font: "fonts/Abaddon_Light.ttf"
-        }
+        render_shadow_text(args, x: args.grid.center_x, y: line_y, text: name, size_px: 32, offset: 0, font: "light")
       end
     end
 
@@ -188,6 +107,89 @@ module Scenes
         args.state.scene = :intro
         return
       end
+    end
+
+    def self.render_shadow_text(args, x:, y:, text:, size_px:, offset:, font:)
+      font_path = font == "bold" ? "fonts/Abaddon_Bold.ttf" : "fonts/Abaddon_Light.ttf"
+      args.outputs.labels << { # shadow 1
+                               x: x + offset,
+                               y: y,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_px: size_px,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: font_path
+      }
+
+      args.outputs.labels << { # shadow 2
+                               x: x - offset,
+                               y: y,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_px: size_px,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: font_path
+      }
+
+      args.outputs.labels << { # shadow 3
+                               x: x,
+                               y: y + offset,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_px: size_px,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: font_path
+      }
+
+      args.outputs.labels << { # shadow 4
+                               x: x,
+                               y: y - offset,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_px: size_px,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 0,
+                               g: 0,
+                               b: 0,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: font_path
+      }
+
+      args.outputs.labels << { # main text
+                               x: x,
+                               y: y,
+                               text: text,
+                               # size specification can be either size_enum or size_px
+                               size_px: size_px,
+                               # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
+                               alignment_enum: 1,
+                               r: 250,
+                               g: 50,
+                               b: 50,
+                               a: 255,
+                               vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
+                               font: font_path
+      }
     end
   end
 end
