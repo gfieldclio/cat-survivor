@@ -42,18 +42,6 @@ module Sprites
     }
 
     PLAYER_SPRITE_MAP = {
-      # 'down_walk_1' => [5, 6],
-      # 'down_walk_2' => [69, 6],
-      # 'down_still' => [37, 6],
-      # 'left_walk_1' => [5, 38],
-      # 'left_walk_2' => [69, 38],
-      # 'left_still' => [37, 38],
-      # 'right_walk_1' => [5, 70],
-      # 'right_walk_2' => [69, 70],
-      # 'right_still' => [37, 70],
-      # 'up_walk_1' => [5, 102],
-      # 'up_walk_2' => [69, 102],
-      # 'up_still' => [37, 102]
       'down_walk_1' => [1, 0],
       'down_walk_2' => [65, 0],
       'down_still' => [33, 0],
