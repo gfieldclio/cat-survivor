@@ -14,7 +14,9 @@ module Weapons
       damage
     end
 
-    private
+    def self.radius
+      150
+    end
 
     def self.render(args, enemy_x, enemy_y)
       start_animation_on_tick = 0
