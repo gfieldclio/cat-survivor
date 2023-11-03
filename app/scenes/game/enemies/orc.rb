@@ -32,7 +32,7 @@ module Scenes::Game
           @y = @y > args.state.player.y ? @y + radius : @y - radius
         end
       end
-      
+
       def move(args, target_x, target_y)
         return animate_dying(args) if dead?
 
@@ -40,8 +40,16 @@ module Scenes::Game
         x_vector = Math.cos(angle) * SPEED
         y_vector = Math.sin(angle) * SPEED
 
-        @x += x_vector
-        @y += y_vector
+        on_blocking_tile =  args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+        if on_blocking_tile
+          @x += x_vector
+          @y += y_vector
+        else
+          @x += x_vector
+          @x -= x_vector if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+          @y += y_vector
+          @y -= y_vector if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+        end
 
         if y_vector < 0 && x_vector.abs < y_vector.abs
           @started_running_at = args.tick_count if @current_direction != "down"
@@ -65,7 +73,7 @@ module Scenes::Game
           @current_direction = "side"
         end
 
-        
+
       end
 
       def dying_in_progress?(args)

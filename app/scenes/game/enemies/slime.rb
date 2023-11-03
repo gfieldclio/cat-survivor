@@ -30,13 +30,24 @@ module Scenes::Game
           @y = @y > args.state.player.y ? @y + radius : @y - radius
         end
       end
-      
+
       def move(args, target_x, target_y)
         return animate_dying(args) if dead?
 
         angle = { x: target_x, y: target_y }.angle_from({ x: @x, y: @y }).to_radians
-        @x += Math.cos(angle) * SPEED
-        @y += Math.sin(angle) * SPEED
+        x_vector = Math.cos(angle) * SPEED
+        y_vector = Math.sin(angle) * SPEED
+
+        on_blocking_tile =  args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+        if on_blocking_tile
+          @x += x_vector
+          @y += y_vector
+        else
+          @x += x_vector
+          @x -= x_vector if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+          @y += y_vector
+          @y -= y_vector if args.state.level.blocking_tiles.any? { |tile| tile.intersect_rect?(self) }
+        end
 
         render(args, "walking")
       end
