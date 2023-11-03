@@ -15,20 +15,6 @@ module Scenes::Game
     def self.init(args)
       return if args.state.player.x
 
-      #todo: hardcoded this for now
-      args.state.player.w ||= 30
-      args.state.player.h ||= 30
-
-      args.state.player.key ||= "down_still"
-      args.state.player.cat_type ||= "cat_6"
-      args.state.player.level ||= 1
-      args.state.player.health ||= 500
-      args.state.player.weapon ||= Weapons::Scratch
-      args.state.player.selected_weapon ||= 0
-      # display on main screen?
-    end
-
-    def self.reset(args)
       args.state.player.x = args.grid.center_x.to_i
       args.state.player.y = args.grid.center_y.to_i
       args.state.player.w = Sprites::Player::SPRITE_WIDTH
@@ -114,7 +100,7 @@ module Scenes::Game
         end
       elsif args.inputs.keyboard.key_up.e
         return if args.state.player.unlocked_weapons.count == 1
-        
+
         index = args.state.player.unlocked_weapons.find_index(args.state.player.weapon)
 
         index += 1
@@ -124,7 +110,7 @@ module Scenes::Game
         args.state.player.selected_weapon = index
       elsif args.inputs.keyboard.key_up.q
         return if args.state.player.unlocked_weapons.count == 1
-        
+
         index = args.state.player.unlocked_weapons.find_index(args.state.player.weapon)
 
         index -= 1
