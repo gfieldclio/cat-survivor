@@ -3,6 +3,7 @@ module Scenes
     def self.tick(args)
       if args.keyboard.key_down.enter
         args.state.scene = :intro
+        args.audio[:bg_music] = { input: "audio/music/abstraction-sanctuary.ogg", looping: true }
         return
       end
 
