@@ -8,6 +8,7 @@ module Scenes::Game
         # death animation?
         args.state.scene = :game_over
         # args.state.scene = :intro
+        args.audio[:bg_music] = { input: "audio/music/abstraction-save_the_city.ogg", looping: true }
       end
     end
 
