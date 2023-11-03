@@ -12,9 +12,8 @@ module Scenes::Game
       end
     end
 
-    def self.render(args)
-      args.state.player.x ||= args.grid.center_x.to_i
-      args.state.player.y ||= args.grid.center_y.to_i
+    def self.init(args)
+      return if args.state.player.x
 
       #todo: hardcoded this for now
       args.state.player.w ||= 30
@@ -32,17 +31,20 @@ module Scenes::Game
     def self.reset(args)
       args.state.player.x = args.grid.center_x.to_i
       args.state.player.y = args.grid.center_y.to_i
-
-      #todo: hardcoded this for now
-      args.state.player.w = 30
-      args.state.player.h = 30
-
+      args.state.player.w = Sprites::Player::SPRITE_WIDTH
+      args.state.player.h = Sprites::Player::SPRITE_HEIGHT
+      args.state.player.anchor_x = 0.5
+      args.state.player.anchor_y = 0.5
       args.state.player.key = "down_still"
-      args.state.player.cat_type ||= "cat_6"
+      args.state.player.cat_type = args.state.player.cat_type || "cat_6"
       args.state.player.level = 1
       args.state.player.health = 500
       args.state.player.weapon = Weapons::Scratch
       args.state.player.selected_weapon = 0
+    end
+
+    def self.reset(args)
+      args.state.player = nil
     end
 
     def self.toggle_on_iteration(args)

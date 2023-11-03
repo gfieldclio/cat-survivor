@@ -3,6 +3,8 @@ module Sprites
     FILE_PATH = 'sprites/cats/'.freeze
     TILE_WIDTH = 30
     TILE_HEIGHT = 32
+    SPRITE_WIDTH = 60
+    SPRITE_HEIGHT = 64
 
     FILE_MAP = {
       "cat_1" => "pipo-nekonin001.png",
@@ -74,8 +76,8 @@ module Sprites
       {
         x: x,
         y: y,
-        w: TILE_WIDTH * 3,
-        h: TILE_HEIGHT * 3,
+        w: SPRITE_WIDTH,
+        h: SPRITE_HEIGHT,
         tile_x: tile_x,
         tile_y: tile_y,
         tile_w: TILE_WIDTH,

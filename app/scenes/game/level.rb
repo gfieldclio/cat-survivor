@@ -20,6 +20,10 @@ module Scenes::Game
       args.state.level.terrain_type = Sprites::Terrain::Ground::FILE_MAP.keys.sample
     end
 
+    def self.reset(args)
+      args.state.level = nil
+    end
+
     def self.render(args)
       left_sprite = (args.state.camera.x / TERRAIN_SPRITE_SIZE) - 1
       right_sprite = left_sprite + (args.state.camera.w / TERRAIN_SPRITE_SIZE) + 2
