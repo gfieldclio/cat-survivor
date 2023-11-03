@@ -1,7 +1,7 @@
 module Sprites
   module Orc
     FILE_PATH = 'sprites/orc/'.freeze
-    TILE_SIZE = 45
+    TILE_SIZE = 28
 
     FILE_MAP = {
       "down_walking" => "D_Walk.png",
@@ -19,18 +19,18 @@ module Sprites
       'down_walking_3' => [153, 12],
       'down_walking_4' => [203, 12],
       'down_walking_5' => [249, 12],
-      'side_walking_0' => [9, 12],
+      'side_walking_0' => [11, 12],
       'side_walking_1' => [58, 12],
       'side_walking_2' => [105, 12],
       'side_walking_3' => [153, 12],
-      'side_walking_4' => [203, 12],
-      'side_walking_5' => [249, 12],
-      'up_walking_0' => [9, 12],
-      'up_walking_1' => [58, 12],
-      'up_walking_2' => [105, 12],
-      'up_walking_3' => [153, 12],
-      'up_walking_4' => [203, 12],
-      'up_walking_5' => [249, 12],
+      'side_walking_4' => [205, 12],
+      'side_walking_5' => [251, 12],
+      'up_walking_0' => [14, 14],
+      'up_walking_1' => [62, 14],
+      'up_walking_2' => [111, 14],
+      'up_walking_3' => [159, 14],
+      'up_walking_4' => [208, 14],
+      'up_walking_5' => [256, 14],
       'down_dying_0' => [9, 12],
       'down_dying_1' => [58, 12],
       'down_dying_2' => [105, 12],
@@ -75,8 +75,8 @@ module Sprites
       {
         x: x,
         y: y,
-        w: TILE_SIZE * 1.5,
-        h: TILE_SIZE * 1.5,
+        w: TILE_SIZE * 2,
+        h: TILE_SIZE * 2,
         path: path,
         tile_x: tile_x,
         tile_y: tile_y,
