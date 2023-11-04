@@ -35,7 +35,7 @@ module Scenes
           if args.state.exp % 300 == 0
             args.state.player.level += 1
             if args.state.player.health <= 400
-              args.state.player.health += 100
+              args.state.player.health += 50
             end
           end
         end
