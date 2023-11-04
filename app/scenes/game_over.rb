@@ -9,22 +9,41 @@ module Scenes
 
       render_background(args)
       render_cat(args)
-      render_shadow_text(args, x: args.grid.center_x, y: 500, text: "Game Over", size_enum: 50, offset: 1)
       render_shadow_text(
         args,
         x: args.grid.center_x,
-        y: 400,
-        text: "Press Enter to return to the title screen.",
+        y: 500,
+        text: "Game Over",
+        size_enum: 50,
+        offset: 1,
+        main_text_r: 255,
+        main_text_g: 50,
+        main_text_b: 50,
+        main_text_a: 255
+      )
+      render_shadow_text(
+        args,
+        x: args.grid.center_x,
+        y: 385,
+        text: "Highest Level: #{args.state.player.level}   EXP Earned: #{args.state.exp}",
         size_enum: 2,
-        offset: 1
+        offset: 1,
+        main_text_r: 255,
+        main_text_g: 255,
+        main_text_b: 255,
+        main_text_a: 255
       )
       render_shadow_text(
         args,
         x: args.grid.center_x,
         y: 350,
-        text: "Highest Level: #{args.state.player.level}   EXP Earned: #{args.state.exp}",
+        text: "Press Enter to return to the title screen.",
         size_enum: 2,
-        offset: 1
+        offset: 1,
+        main_text_r: 255,
+        main_text_g: 255,
+        main_text_b: 255,
+        main_text_a: 255
       )
       render_main_menu_button(args)
     end
@@ -107,7 +126,7 @@ module Scenes
       end
     end
 
-    def self.render_shadow_text(args, x:, y:, text:, size_enum:, offset:)
+    def self.render_shadow_text(args, x:, y:, text:, size_enum:, offset:, main_text_r:, main_text_g:, main_text_b:, main_text_a:)
       args.outputs.labels << { # shadow 1
                                x: x + offset,
                                y: y,
@@ -180,10 +199,14 @@ module Scenes
                                size_enum: size_enum,
                                # 0 represents "left aligned". 1 represents "center aligned". 2 represents "right aligned".
                                alignment_enum: 1,
-                               r: 255,
-                               g: 50,
-                               b: 50,
-                               a: 255,
+                              #  r: 255,
+                              #  g: 50,
+                              #  b: 50,
+                              #  a: 255,
+                               r: main_text_r,
+                               g: main_text_g,
+                               b: main_text_b,
+                               a: main_text_a,
                                vertical_alignment_enum: 2, # 0 is bottom, 1 is middle, 2 is top
                                font: "fonts/Abaddon_Bold.ttf"
       }
